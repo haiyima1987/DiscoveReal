@@ -17,7 +17,7 @@ class CreateLocationsTable extends Migration
             $table->increments('id');
             $table->string('address');
             $table->string('city');
-            $table->string('country');
+            $table->integer('country_id');
             $table->timestamps();
         });
     }

@@ -14,11 +14,12 @@ class UsersTableSeeder extends Seeder
     public function run()
     {
         $user = new User([
-            'id' => 0,
             'role_id' => 0,
             'username' => 'haiyima',
             'password' => bcrypt(11111111),
-            'name' => 'Haiyi',
+            'photo' => null,
+            'firstName' => 'Haiyi',
+            'lastName' => 'Ma',
             'email' => 'haiyima@yahoo.com',
             'birthday' => Carbon::parse('1987-02-25'),
             'gender' => 'M',
@@ -27,11 +28,12 @@ class UsersTableSeeder extends Seeder
         ]);
         $user->save();
         $user = new User([
-            'id' => 1,
             'role_id' => 1,
             'username' => 'robsmith',
             'password' => bcrypt(11111111),
-            'name' => 'Rob Smith',
+            'photo' => null,
+            'firstName' => 'Rob',
+            'lastName' => 'Smith',
             'email' => 'robsmith@yahoo.com',
             'birthday' => Carbon::parse('1985-05-19'),
             'gender' => 'M',
@@ -40,11 +42,12 @@ class UsersTableSeeder extends Seeder
         ]);
         $user->save();
         $user = new User([
-            'id' => 2,
             'role_id' => 1,
             'username' => 'laurastone',
             'password' => bcrypt(11111111),
-            'name' => 'Laura Stone',
+            'photo' => null,
+            'firstName' => 'Laura',
+            'lastName' => 'Stone',
             'email' => 'laurastone@yahoo.com',
             'birthday' => Carbon::parse('1989-11-02'),
             'gender' => 'F',
@@ -53,11 +56,12 @@ class UsersTableSeeder extends Seeder
         ]);
         $user->save();
         $user = new User([
-            'id' => 3,
             'role_id' => 1,
-            'username' => 'zhangmengxue',
+            'username' => 'mengxuezhang',
             'password' => bcrypt(11111111),
-            'name' => 'Zhang Mengxue',
+            'photo' => null,
+            'firstName' => 'Mengxue',
+            'lastName' => 'Zhang',
             'email' => 'zhangmengxue@yahoo.com',
             'birthday' => Carbon::parse('1991-07-12'),
             'gender' => 'F',
