@@ -27,6 +27,22 @@ Route::get('/about', [
     'as' => 'aboutUs'
 ]);
 
+Route::group(['prefix' => 'post'], function () {
+
+//    Route::group(['middleware' => 'auth'], function () {
+
+        Route::get('/create', [
+            'uses' => 'PostController@createPost',
+            'as' => 'post.create'
+        ]);
+
+        Route::post('/publish', [
+            'uses' => 'PostController@publishPost',
+            'as' => 'post.publish'
+        ]);
+//    });
+});
+
 Route::group(['prefix' => 'user'], function () {
 
     Route::group(['middleware' => 'guest'], function () {

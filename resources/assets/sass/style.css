@@ -1,0 +1,48 @@
+@import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600);
+* {
+  border: 1px dashed black; }
+
+html, body {
+  margin: 0;
+  padding: 0; }
+
+h1, h2, h3, h4, h5, h6 {
+  text-align: center; }
+
+p {
+  text-align: center; }
+
+.row {
+  margin: 0;
+  padding: 0; }
+
+.leftCol {
+  padding: 0; }
+
+.sidebar {
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  border-radius: 0; }
+
+.navList {
+  padding: 0; }
+  .navList li {
+    width: 100%;
+    font-size: 1.2em;
+    border-top: 1px solid #f5f8fa; }
+    .navList li i {
+      font-size: 1.2em; }
+
+.frame {
+  padding: 0; }
+
+.countryBox {
+  margin: 5px; }
+
+.imgBox {
+  padding: 0;
+  text-align: center; }
+  .imgBox img {
+    width: 100%; }
+
+/*# sourceMappingURL=style.css.map */
