@@ -8,6 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 class User extends Authenticatable
 {
     use Notifiable;
+    public $dir = 'img/users/';
 
     /**
      * The attributes that are mass assignable.
@@ -15,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'id', 'role_id', 'username', 'password', 'name', 'email', 'birthday', 'gender', 'city', 'country'
+        'role_id', 'username', 'password', 'photo', 'name', 'email', 'birthday', 'gender', 'city', 'country'
     ];
 
     /**
@@ -26,4 +27,15 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function getPhotoAttributes($value)
+    {
+        return $this->dir . $value;
+    }
+
+    // has many first foreign key then local key
+    public function posts()
+    {
+        return $this->hasMany('App\Post');
+    }
 }
