@@ -29,8 +29,9 @@ class PostRequest extends FormRequest
             'address' => 'required',
             'city' => 'required',
             'country' => 'required',
+            'category' => 'required',
 //            'photo' => 'required',
-            'content' => 'required|min:24'
+            'postContent' => 'required|min:24'
         ];
     }
 }

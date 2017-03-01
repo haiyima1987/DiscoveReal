@@ -31,7 +31,7 @@ Route::group(['prefix' => 'post'], function () {
 
 //    Route::group(['middleware' => 'auth'], function () {
 
-        Route::get('/create', [
+        Route::get('/showCreate', [
             'uses' => 'PostController@createPost',
             'as' => 'post.create'
         ]);
@@ -39,6 +39,26 @@ Route::group(['prefix' => 'post'], function () {
         Route::post('/publish', [
             'uses' => 'PostController@publishPost',
             'as' => 'post.publish'
+        ]);
+
+        Route::get('/view/{id}', [
+            'uses' => 'PostController@viewPost',
+            'as' => 'post.view'
+        ]);
+
+        Route::get('/showEdit/{id}', [
+            'uses' => 'PostController@editPost',
+            'as' => 'post.edit'
+        ]);
+
+        Route::put('/update/{id}', [
+            'uses' => 'PostController@updatePost',
+            'as' => 'post.update'
+        ]);
+
+        Route::delete('/remove/{id}', [
+            'uses' => 'PostController@removePost',
+            'as' => 'post.remove'
         ]);
 //    });
 });

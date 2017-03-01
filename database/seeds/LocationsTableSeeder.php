@@ -13,37 +13,37 @@ class LocationsTableSeeder extends Seeder
     public function run()
     {
         $location = new Location([
-            'name' => 'Dam Square',
-            'address' => 'Dam Square',
-            'city' => 'Amsterdam',
+            'name' => 'dam square',
+            'address' => 'dam square',
+            'city' => 'amsterdam',
             'country_id' => 7
         ]);
         $location->save();
         $location = new Location([
-            'name' => 'Paradiso',
-            'address' => 'Weteringschans 6-8, 1017 SG',
-            'city' => 'Amsterdam',
+            'name' => 'paradiso',
+            'address' => 'weteringschans 6-8, 1017 sg',
+            'city' => 'amsterdam',
             'country_id' => 7
         ]);
         $location->save();
         $location = new Location([
-            'name' => 'Manneken Pis',
-            'address' => 'Lievevrouwbroersstraat 31',
-            'city' => 'Brussels',
+            'name' => 'manneken pis',
+            'address' => 'lievevrouwbroersstraat 31',
+            'city' => 'brussels',
             'country_id' => 1
         ]);
         $location->save();
         $location = new Location([
-            'name' => 'Brandenburg Gate',
-            'address' => 'Pariser Platz',
-            'city' => 'Berlin',
+            'name' => 'brandenburg gate',
+            'address' => 'pariser platz',
+            'city' => 'berlin',
             'country_id' => 4
         ]);
         $location->save();
         $location = new Location([
-            'name' => 'La Sagrada Familia',
-            'address' => 'Carrer de Mallorca, 401',
-            'city' => 'Barcelona',
+            'name' => 'la sagrada familia',
+            'address' => 'carrer de mallorca, 401',
+            'city' => 'barcelona',
             'country_id' => 10
         ]);
         $location->save();

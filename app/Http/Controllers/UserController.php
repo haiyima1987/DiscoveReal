@@ -34,7 +34,7 @@ class UserController extends Controller
 
         if ($user->save()) {
             Auth::login($user);
-
+            Session::put('user', $user);
             return view('pages.profile', compact('user'));
         } else {
             return view('pages.signup');
@@ -53,17 +53,17 @@ class UserController extends Controller
 
         if (Auth::attempt($request->only($login, 'password'))) {
             $user = Auth::User();
-/*            $table->integer('role_id');
-            $table->string('username')->unique();
-            $table->string('password');
-            $table->string('photo')->nullable();
-            $table->string('firstName');
-            $table->string('lastName');
-            $table->string('email')->unique();
-            $table->date('birthday');
-            $table->char('gender');
-            $table->string('city');
-            $table->string('country');*/
+            /*            $table->integer('role_id');
+                        $table->string('username')->unique();
+                        $table->string('password');
+                        $table->string('photo')->nullable();
+                        $table->string('firstName');
+                        $table->string('lastName');
+                        $table->string('email')->unique();
+                        $table->date('birthday');
+                        $table->char('gender');
+                        $table->string('city');
+                        $table->string('country');*/
             Session::put('user', $user);
             return view('pages.profile', compact('user'));
         } else {
@@ -77,14 +77,18 @@ class UserController extends Controller
         }
     }
 
-    public function logOutUser(){
+    public function logOutUser()
+    {
         Auth::logout();
+        Session::forget('user');
         return redirect()->route('countries');
     }
 
     public function showProfile()
     {
         $user = Session::has('user') ? Session::get('user') : null;
-        return view('pages.profile', compact('user'));
+        $posts = User::find($user['id'])->posts;
+//        dd($posts);
+        return view('pages.profile', compact('user', 'posts'));
     }
 }

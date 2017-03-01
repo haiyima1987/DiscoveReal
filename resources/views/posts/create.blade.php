@@ -2,7 +2,7 @@
 
 @section('content')
 
-    {!! Form::open(['method'=>'post', 'files'=>'true', 'action'=>'PostController@publishPost']) !!}
+    {!! Form::open(['method'=>'post', 'action'=>'PostController@publishPost', 'files'=>true]) !!}
 
     {{ csrf_field() }}
 
@@ -44,12 +44,12 @@
             {!! Form::label('category', 'Category', ['class'=>'col-form-label']) !!}
             {!! Form::select('category', $categories, null, ['class'=>'form-control', 'placeholder'=>'Select category']) !!}
         </div>
-        <div class="form-group {{ $errors->has('path') ? ' has-error' : '' }}">
-            {!! Form::label('path', 'Upload image', ['class'=>'col-form-label']) !!}
-            {!! Form::file('path', ['class'=>'form-control', 'placeholder'=>'Enter path']) !!}
-            @if ($errors->has('path'))
-                <span class="help-block"><strong>{{ $errors->first('path') }}</strong></span>
-            @endif
+        <div class="form-group {{ $errors->has('photo') ? ' has-error' : '' }}">
+            {!! Form::label('photo', 'Upload image', ['class'=>'col-form-label']) !!}
+            {!! Form::file('photo', ['class'=>'form-control']) !!}
+            {{--@if ($errors->has('photo'))--}}
+                {{--<span class="help-block"><strong>{{ $errors->first('photo') }}</strong></span>--}}
+            {{--@endif--}}
         </div>
         <div class="form-group {{ $errors->has('postContent') ? ' has-error' : '' }}">
             {!! Form::label('postContent', 'Your post content', ['class'=>'col-form-label']) !!}

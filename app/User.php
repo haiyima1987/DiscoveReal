@@ -32,4 +32,10 @@ class User extends Authenticatable
     {
         return $this->dir . $value;
     }
+
+    // has many first foreign key then local key
+    public function posts()
+    {
+        return $this->hasMany('App\Post');
+    }
 }
