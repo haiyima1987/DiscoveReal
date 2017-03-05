@@ -12,6 +12,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
+use Mews\Purifier\Facades\Purifier;
 
 class PostController extends Controller
 {
@@ -34,7 +35,7 @@ class PostController extends Controller
         $post = new Post([
             'user_id' => $user['id'],
             'title' => strtolower($request->title),
-            'content' => $request->postContent,
+            'content' => Purifier::clean($request->postContent),
             'rate' => null,
             'location_id' => $locationId,
             'category_id' => $request->category
@@ -58,42 +59,38 @@ class PostController extends Controller
         }
     }
 
-    public function viewPost($id)
+    public function viewPost(Post $post)
     {
         $user = Session::has('user') ? Session::get('user') : null;
-        $post = Post::find($id);
         return view('posts.view', compact('post', 'user'));
     }
 
-    public function editPost($id)
+    public function editPost(Post $post)
     {
         $categories = Category::all()->pluck('name', 'id');
         $countries = Country::all()->pluck('name', 'id');
-        $post = Post::find($id);
         $category = Category::find($post->category_id);
         $location = Location::find($post->location_id);
         $country = Country::find($location->country_id);
         return view('posts.edit', compact('post', 'location', 'categories', 'category', 'countries', 'country'));
     }
 
-    public function updatePost(PostRequest $request, $id)
+    public function updatePost(PostRequest $request, Post $post)
     {
-//        $id = $request->id;
         $attraction = strtolower($request->attraction);
         $address = strtolower($request->address);
         $city = strtolower($request->city);
         $countryId = $request->country;
         $locationId = $this->getLocationId($attraction, $address, $city, $countryId);
 
-        $post = Post::find($id);
         $post->update([
             'title' => strtolower($request->title),
-            'content' => $request->postContent,
+            'content' => clean($request->postContent),
             'location_id' => $locationId,
             'category_id' => $request->category
         ]);
 
-        return redirect()->route('post.view', ['id' => $id]);
+        return redirect()->route('post.view', ['id' => $post->id]);
 //        $user = Session::get('user');
 //        $post = new Post([
 //            'user_id' => $user['id'],
@@ -122,14 +119,13 @@ class PostController extends Controller
 //        }
     }
 
-    public function removePost($id)
+    public function removePost(Post $post)
     {
-        $post = Post::find($id);
         $posts = Post::find($post->location_id);
         if (count($posts) == 1) {
             Location::destroy($post->location_id);
         }
-        Post::destroy($id);
+        $post->delete();
         return redirect()->route('user.profile');
     }
 
