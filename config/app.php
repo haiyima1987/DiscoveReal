@@ -179,6 +179,8 @@ return [
 
         Collective\Html\HtmlServiceProvider::class, // form helper
         Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class, // Laravel IDE helper
+        Mews\Purifier\PurifierServiceProvider::class, // HTML purifier
+        Intervention\Image\ImageServiceProvider::class // intervention image manipulator
 
     ],
 
@@ -231,6 +233,8 @@ return [
 
         'Form' => Collective\Html\FormFacade::class,
         'Html' => Collective\Html\HtmlFacade::class,
+        'Purifier' => Mews\Purifier\Facades\Purifier::class,
+        'Image' => Intervention\Image\Facades\Image::class
 
     ],
 

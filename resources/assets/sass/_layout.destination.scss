@@ -1,9 +1,13 @@
 .frame {
   padding: 0;
+  a {
+    display: block;
+  }
 }
 
 .countryBox {
   margin: 5px;
+  position: relative;
 }
 
 .imgBox {

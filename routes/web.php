@@ -41,22 +41,22 @@ Route::group(['prefix' => 'post'], function () {
             'as' => 'post.publish'
         ]);
 
-        Route::get('/view/{id}', [
+        Route::get('/view/{post}', [
             'uses' => 'PostController@viewPost',
             'as' => 'post.view'
         ]);
 
-        Route::get('/showEdit/{id}', [
+        Route::get('/showEdit/{post}', [
             'uses' => 'PostController@editPost',
             'as' => 'post.edit'
         ]);
 
-        Route::put('/update/{id}', [
+        Route::put('/update/{post}', [
             'uses' => 'PostController@updatePost',
             'as' => 'post.update'
         ]);
 
-        Route::delete('/remove/{id}', [
+        Route::delete('/remove/{post}', [
             'uses' => 'PostController@removePost',
             'as' => 'post.remove'
         ]);
@@ -93,6 +93,11 @@ Route::group(['prefix' => 'user'], function () {
         Route::get('/profile', [
             'uses' => 'UserController@showProfile',
             'as' => 'user.profile'
+        ]);
+
+        Route::post('/updateImg', [
+            'uses' => 'UserController@updateProfileImage',
+            'as' => 'user.updateImg'
         ]);
 
         Route::get('/logout', [

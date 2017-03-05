@@ -65,7 +65,7 @@ class UserController extends Controller
                         $table->string('city');
                         $table->string('country');*/
             Session::put('user', $user);
-            return view('pages.profile', compact('user'));
+            return redirect()->route('user.profile');
         } else {
             $error = [];
             if (User::where($login, $request->login)->first()) {
@@ -88,7 +88,15 @@ class UserController extends Controller
     {
         $user = Session::has('user') ? Session::get('user') : null;
         $posts = User::find($user['id'])->posts;
-//        dd($posts);
         return view('pages.profile', compact('user', 'posts'));
+    }
+
+    public function updateProfileImage(Request $request)
+    {
+        $this->validate($request, [
+            'photo' => 'required|image|max:512|mimes:jpeg,jpg,bmp,png',
+        ]);
+
+        echo 'validated';
     }
 }

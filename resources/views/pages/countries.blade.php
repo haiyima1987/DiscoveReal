@@ -9,16 +9,17 @@
             @foreach($countryChunk as $country)
 
                 <div class="col-sm-4 frame">
-                    <div class="countryBox clearfix">
-                        <a href="{{ route('countries', ['id' => $country->id]) }}">
-                            <div class="col-xs-4 imgBox">
+                    <a href="{{ route('countries', ['id' => $country->id]) }}">
+                        <div class="countryBox clearfix">
+                            <div class="col-xs-6 imgBox">
                                 <img src="{{ $country->path }}" alt="{{ $country->id }}">
                             </div>
-                            <div class="col-xs-8">
+                            <div class="col-xs-6">
                                 <p>{{ $country->name }}</p>
+                                <p>{{ $count = $postCount[$country->id] }} {{ $count > 1 ? 'Posts' : 'Post' }}</p>
                             </div>
-                        </a>
-                    </div>
+                        </div>
+                    </a>
                 </div>
 
             @endforeach

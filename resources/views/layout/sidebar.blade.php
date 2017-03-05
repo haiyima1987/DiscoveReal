@@ -8,10 +8,10 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="#">Brand</a>
+        <a class="navbar-brand" href="#">DiscoveReal</a>
     </div>
     <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse navList">
+    <div class="collapse navbar-collapse navList" id="bs-sidebar-navbar-collapse-1">
         <ul class="nav navbar-nav">
             <li class="active">
                 <a href="{{ route('home') }}">Home<i class="fa fa-home pull-right" aria-hidden="true"></i></a>
@@ -26,10 +26,6 @@
                 <a href="{{ route('countries') }}">Destination<i class="fa fa-globe pull-right" aria-hidden="true"></i></a>
             </li>
             @if(Auth::check())
-                <li>
-                    <a href="{{ route('user.logOutUser') }}">Log Out
-                        <i class="fa fa-user pull-right" aria-hidden="true"></i></a>
-                </li>
                 <li>
                     <a href="{{ route('user.profile') }}">My Profile
                         <i class="fa fa-user pull-right" aria-hidden="true"></i></a>

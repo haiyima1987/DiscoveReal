@@ -1,7 +1,4 @@
 @import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600);
-* {
-  border: 1px dashed black; }
-
 html, body {
   margin: 0;
   padding: 0; }
@@ -35,9 +32,12 @@ p {
 
 .frame {
   padding: 0; }
+  .frame a {
+    display: block; }
 
 .countryBox {
-  margin: 5px; }
+  margin: 5px;
+  position: relative; }
 
 .imgBox {
   padding: 0;
