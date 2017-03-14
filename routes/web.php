@@ -29,7 +29,12 @@ Route::get('/about', [
 
 Route::group(['prefix' => 'post'], function () {
 
-//    Route::group(['middleware' => 'auth'], function () {
+    Route::get('/view/{post}', [
+        'uses' => 'PostController@viewPost',
+        'as' => 'post.view'
+    ]);
+
+    Route::group(['middleware' => 'auth'], function () {
 
         Route::get('/showCreate', [
             'uses' => 'PostController@createPost',
@@ -41,10 +46,6 @@ Route::group(['prefix' => 'post'], function () {
             'as' => 'post.publish'
         ]);
 
-        Route::get('/view/{post}', [
-            'uses' => 'PostController@viewPost',
-            'as' => 'post.view'
-        ]);
 
         Route::get('/showEdit/{post}', [
             'uses' => 'PostController@editPost',
@@ -60,10 +61,26 @@ Route::group(['prefix' => 'post'], function () {
             'uses' => 'PostController@removePost',
             'as' => 'post.remove'
         ]);
-//    });
+    });
+});
+
+Route::group(['prefix' => 'comment'], function () {
+
+    Route::group(['middleware' => 'auth'], function () {
+
+        Route::post('/publish/{post}', [
+            'uses' => 'CommentController@publishComment',
+            'as' => 'comment.publish'
+        ]);
+    });
 });
 
 Route::group(['prefix' => 'user'], function () {
+
+    Route::get('/profile/{user}', [
+        'uses' => 'UserController@showProfile',
+        'as' => 'user.profile'
+    ]);
 
     Route::group(['middleware' => 'guest'], function () {
 
@@ -90,14 +107,14 @@ Route::group(['prefix' => 'user'], function () {
 
     Route::group(['middleware' => 'auth'], function () {
 
-        Route::get('/profile', [
-            'uses' => 'UserController@showProfile',
-            'as' => 'user.profile'
-        ]);
-
-        Route::post('/updateImg', [
+        Route::post('/updateImg/{user}', [
             'uses' => 'UserController@updateProfileImage',
             'as' => 'user.updateImg'
+        ]);
+
+        Route::get('/profile', [
+            'uses' => 'UserController@viewProfile',
+            'as' => 'user.viewProfile'
         ]);
 
         Route::get('/logout', [

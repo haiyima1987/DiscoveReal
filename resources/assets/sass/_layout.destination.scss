@@ -1,3 +1,4 @@
+// boxes that contains countries
 .frame {
   padding: 0;
   a {
@@ -16,4 +17,10 @@
   img {
     width: 100%;
   }
+}
+
+// table containing posts of one country
+.tableContainer {
+  //background: $bgGrey;
+  padding: 30px;
 }

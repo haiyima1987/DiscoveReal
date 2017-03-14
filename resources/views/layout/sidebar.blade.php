@@ -13,31 +13,40 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse navList" id="bs-sidebar-navbar-collapse-1">
         <ul class="nav navbar-nav">
-            <li class="active">
-                <a href="{{ route('home') }}">Home<i class="fa fa-home pull-right" aria-hidden="true"></i></a>
+            <li>
+                <a href="{{ route('home') }}">Home
+                    <div class="sideIcon pull-right"><i class="fa fa-home" aria-hidden="true"></i></div>
+                </a>
             </li>
             <li>
-                <a href="{{ route('aboutUs') }}">About Us<i class="fa fa-info-circle pull-right" aria-hidden="true"></i></a>
+                <a href="{{ route('aboutUs') }}">About Us
+                    <div class="sideIcon pull-right"><i class="fa fa-info-circle" aria-hidden="true"></i></div>
+                </a>
             </li>
             {{--<li>--}}
             {{--<a href="#">Messages<i class="fa fa-envelope pull-right" aria-hidden="true"></i></a>--}}
             {{--</li>--}}
             <li>
-                <a href="{{ route('countries') }}">Destination<i class="fa fa-globe pull-right" aria-hidden="true"></i></a>
+                <a href="{{ route('countries') }}">Destination
+                    <div class="sideIcon pull-right"><i class="fa fa-globe" aria-hidden="true"></i></div>
+                </a>
             </li>
             @if(Auth::check())
                 <li>
-                    <a href="{{ route('user.profile') }}">My Profile
-                        <i class="fa fa-user pull-right" aria-hidden="true"></i></a>
+                    <a href="{{ route('user.viewProfile') }}">My Profile
+                        <div class="sideIcon pull-right"><i class="fa fa-user" aria-hidden="true"></i></div>
+                    </a>
                 </li>
             @else
                 <li>
                     <a href="{{ route('user.signup') }}">Sign Up
-                        <i class="fa fa-user-plus pull-right" aria-hidden="true"></i></a>
+                        <div class="sideIcon pull-right"><i class="fa fa-user-plus" aria-hidden="true"></i></div>
+                    </a>
                 </li>
                 <li>
                     <a href="{{ route('user.login') }}">Log In
-                        <i class="fa fa-user pull-right" aria-hidden="true"></i></a>
+                        <div class="sideIcon pull-right"><i class="fa fa-user" aria-hidden="true"></i></div>
+                    </a>
                 </li>
             @endif
             {{--<li class="dropdown">--}}

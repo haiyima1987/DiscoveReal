@@ -8,7 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 class User extends Authenticatable
 {
     use Notifiable;
-    public $dir = 'img/users/';
+    public $dir = 'storage/img/users/';
 
     /**
      * The attributes that are mass assignable.
@@ -28,10 +28,15 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    public function getPhotoAttributes($value)
+    public function getPhotoAttribute($value)
     {
-        return $this->dir . $value;
+        if ($value) {
+            return $this->dir . $value;
+        } else {
+            return null;
+        }
     }
+
 
     // has many first foreign key then local key
     public function posts()

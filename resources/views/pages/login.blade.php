@@ -10,18 +10,18 @@
 
         <fieldset>
             <legend>Login Information:</legend>
-            <div class="input-group input-group-lg {{ $errors->has('login') ? 'has-error' : '' }}">
+            <div class="input-group input-group-lg {{ $errors->has('msg') ? 'has-error' : '' }}">
                 <span class="input-group-addon"><i class="fa fa-user-circle-o fa-fw" aria-hidden="true"></i></span>
                 {!! Form::text('login', old('login'), ['class'=>'form-control', 'placeholder'=>'Enter Username/Email']) !!}
-                @if ($errors->has('login'))
-                <span class="help-block"><strong>{{ $errors->first('login') }}</strong></span>
+                @if ($errors->has('msg'))
+                    <span class="help-block"><strong>{{ $errors->first('msg') }}</strong></span>
                 @endif
             </div>
-            <div class="input-group input-group-lg {{ $errors->has('password') ? 'has-error' : '' }}">
+            <div class="input-group input-group-lg {{ $errors->has('msg') ? 'has-error' : '' }}">
                 <span class="input-group-addon"><i class="fa fa-lock fa-fw" aria-hidden="true"></i></span>
                 {!! Form::password('password', ['class'=>'form-control', 'placeholder'=>'Enter Password']) !!}
-                @if ($errors->has('password'))
-                <span class="help-block"><strong>{{ $errors->first('password') }}</strong></span>
+                @if ($errors->has('msg'))
+                    <span class="help-block"><strong>{{ $errors->first('msg') }}</strong></span>
                 @endif
             </div>
             <br>
@@ -36,8 +36,9 @@
             <div class="form-group row">
                 <div class="col-sm-9 col-sm-offset-3">
                     {!! Form::submit('Log In', ['class'=>'btnSignUpLogIn btn btn-success pull-left']) !!}
-                    <p class="text-left"><a class="btn btn-link" href="{{ route('password.requestForm') }}">Forgot
-                            Your Password?</a></p>
+                    <p class="text-left">
+                        <a class="btn btn-link" href="{{ route('password.requestForm') }}">
+                            Forgot Your Password?</a></p>
                 </div>
             </div>
         </fieldset>

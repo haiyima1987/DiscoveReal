@@ -25,14 +25,18 @@
 </head>
 <body>
 
-<div class="row">
-    <div class="col-sm-3 leftCol">
+<div class="bg container-fluid row">
+    <div class="col-sm-3 col-md-2 leftCol">
         @include('layout.sidebar')
     </div>
-    <div class="col-sm-9 rightCol">
+    <div class="col-sm-9 col-md-10 rightCol">
+        @yield('banner')
         @yield('content')
     </div>
 </div>
+
+{!! Html::script('js/main.js') !!}
+@yield('scripts')
 
 </body>
 </html>

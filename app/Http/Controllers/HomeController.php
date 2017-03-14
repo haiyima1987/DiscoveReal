@@ -36,6 +36,7 @@ class HomeController extends Controller
 
             return view('pages.countries', compact('countries', 'postCount'));
         } else {
+            $country = Country::find($id);
             $allPosts = [];
 
             if ($locations = Location::where('country_id', $id)->get()) {
@@ -46,7 +47,7 @@ class HomeController extends Controller
                 }
             }
 
-            return view('pages.country', compact('allPosts'));
+            return view('pages.country', compact('allPosts', 'country'));
         }
     }
 }
