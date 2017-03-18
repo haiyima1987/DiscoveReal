@@ -80,10 +80,10 @@ class UserController extends Controller
         return redirect()->route('countries');
     }
 
-    public function showProfile(User $user)
+    public function viewAllPosts(User $user)
     {
         $posts = $user->posts;
-        return view('pages.profile', compact('user', 'posts'));
+        return view('pages.allPosts', compact('user', 'posts'));
     }
 
     public function viewProfile()

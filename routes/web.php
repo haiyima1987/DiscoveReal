@@ -77,9 +77,9 @@ Route::group(['prefix' => 'comment'], function () {
 
 Route::group(['prefix' => 'user'], function () {
 
-    Route::get('/profile/{user}', [
-        'uses' => 'UserController@showProfile',
-        'as' => 'user.profile'
+    Route::get('/allPosts/{user}', [
+        'uses' => 'UserController@viewAllPosts',
+        'as' => 'user.allPosts'
     ]);
 
     Route::group(['middleware' => 'guest'], function () {
@@ -112,7 +112,7 @@ Route::group(['prefix' => 'user'], function () {
             'as' => 'user.updateImg'
         ]);
 
-        Route::get('/profile', [
+        Route::get('/viewProfile', [
             'uses' => 'UserController@viewProfile',
             'as' => 'user.viewProfile'
         ]);

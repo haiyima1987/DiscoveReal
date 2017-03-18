@@ -3,7 +3,9 @@
 @section('banner')
     <div class="banner">
         <img src="{{ url('img/banner1.png') }}" alt="banner">
-        <div class="bannerText"><h2><strong>{{ $country->name }}</strong></h2></div>
+        <div class="bannerText">
+            <h2><strong>{{ $country->name }}</strong></h2>
+        </div>
     </div>
 @endsection
 
@@ -13,8 +15,7 @@
         <table class="table table-condensed">
             <thead>
             <tr>
-                <td></td>
-                <td>Topics</td>
+                <td class="tdHead">Topics</td>
                 <td>Statistics</td>
                 <td>Date Updated</td>
             </tr>
@@ -22,13 +23,25 @@
             <tbody>
             @foreach($allPosts as $post)
                 <tr>
-                    <td>{{ $post->id }}</td>
                     <td class="col-sm-8 tdHead"><a href="{{ route('post.view', $post) }}">
                             {{ ucwords($post->title) }}
                             {{--<i class="fa fa-list-ul" aria-hidden="true"></i> View--}}
                         </a>
                         <p>Published by
-                            <a href="{{ route('user.profile', $user = $post->user) }}">{{ $user->username }}</a>
+                            <a href="#"
+                               data-toggle="modal"
+                               data-target="#userInfo"
+                               data-img="{{ ($user = $post->user)->photo ? url($user->photo) : url('img/avatar.png') }}"
+                               data-username="{{ $user->username }}"
+                               data-role="{{ $user->role->role }}"
+                               data-bday="{{ $user->birthday }}"
+                               data-location="{{ $user->city. ', '.$user->country }}"
+                               data-year="{{ $user->created_at->format('d-M-Y') }}"
+                               data-count="{{ count($user->posts) }}"
+                               data-route="{{ route('user.allPosts', $user) }}">
+                                {{ $post->user->username }}
+                            </a>
+                            {{--                            <a href="{{ route('user.profile', $user = $post->user) }}">{{ $user->username }}</a>--}}
                             at {{ $post->created_at->format('d-M-Y, H:i A') }}
                         </p>
                     </td>
@@ -46,6 +59,49 @@
             @endforeach
             </tbody>
         </table>
+    </div>
+
+    {{--modal--}}
+    <div class="modal fade" id="userInfo"
+         tabindex="-1" role="dialog"
+         aria-labelledby="favoritesModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close"
+                            data-dismiss="modal"
+                            aria-label="Close">
+                        <span aria-hidden="true">&times;</span></button>
+                    {{--<h4 class="modal-title"--}}
+                    {{--id="userHeader">Title</h4>--}}
+                </div>
+                <div class="modal-body clearfix">
+                    <div class="col-sm-3">
+                        <img class="img-circle img-responsive" id="userImg" src="">
+                    </div>
+                    <div class="col-sm-5">
+                        <p id="userName">username</p>
+                        <p id="userRole">role</p>
+                        <p id="userYear">year</p>
+                        <p id="userCount">count</p>
+                    </div>
+                    <div class="col-sm-4">
+                        <p id="userBday"><i class="fa fa-gift"></i> birthday</p>
+                        <p id="userLocation"><i class="fa fa-map-marker"></i> location</p>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button"
+                            class="btn btn-default pull-left"
+                            data-dismiss="modal">Close
+                    </button>
+                    <a href="#"
+                       id="userRoute"
+                       class="btn btn-primary pull-right">View Posts
+                    </a>
+                </div>
+            </div>
+        </div>
     </div>
 
 @endsection

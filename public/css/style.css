@@ -3,9 +3,6 @@ html, body {
   margin: 0;
   padding: 0; }
 
-h1, h2, h3, h4, h5, h6 {
-  text-align: center; }
-
 .row {
   margin: 0;
   padding: 0; }
@@ -15,12 +12,15 @@ h1, h2, h3, h4, h5, h6 {
   top: 0;
   right: 0;
   bottom: 0;
-  left: 0; }
+  left: 0;
+  display: flex; }
 
 .leftCol {
   padding: 0;
   height: 100%;
-  background: #383431; }
+  background: #383431;
+  position: fixed;
+  z-index: 50; }
 
 .rightCol {
   padding: 0;
@@ -38,7 +38,10 @@ h1, h2, h3, h4, h5, h6 {
     bottom: 5%;
     color: #f3920f; }
 
-.tdHead {
+.content {
+  padding: 20px; }
+
+.table-condensed .tdHead {
   padding-left: 20px; }
 
 .sidebar {
@@ -78,10 +81,23 @@ h1, h2, h3, h4, h5, h6 {
 
 .countryBox {
   margin: 5px;
-  position: relative; }
+  position: relative;
+  text-align: center;
+  border: 1px solid #ababab; }
+  .countryBox .countryText {
+    position: absolute;
+    top: 50%;
+    left: 66.6%;
+    -webkit-transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    -o-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%); }
+    .countryBox .countryText h4 {
+      margin-top: 15px; }
 
 .imgBox {
-  padding: 0;
+  padding: 6px;
   text-align: center; }
   .imgBox img {
     width: 100%; }
@@ -89,7 +105,31 @@ h1, h2, h3, h4, h5, h6 {
 .tableContainer {
   padding: 30px; }
 
+.postBox, .commentBox, .profileBox {
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  border: 2px solid #ababab;
+  margin: 0 0 10px 0;
+  display: flex; }
+
+.postSide, .commentSide, .profileSide {
+  text-align: center;
+  background: #ababab; }
+  .postSide img, .commentSide img, .profileSide img {
+    width: 50%;
+    margin: 15px auto; }
+  .postSide a, .commentSide a, .profileSide a {
+    text-decoration: none; }
+
 #imgForm {
   display: none; }
+
+.headBar {
+  margin-bottom: 20px;
+  padding: 0; }
+
+.profileSide img {
+  width: 80%; }
 
 /*# sourceMappingURL=style.css.map */

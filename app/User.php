@@ -37,10 +37,14 @@ class User extends Authenticatable
         }
     }
 
-
     // has many first foreign key then local key
     public function posts()
     {
         return $this->hasMany('App\Post');
+    }
+
+    public function role()
+    {
+        return $this->belongsTo('App\Role');
     }
 }

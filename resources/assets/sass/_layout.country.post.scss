@@ -1,0 +1,64 @@
+// boxes that contains countries
+.frame {
+  padding: 0;
+  a {
+    display: block;
+  }
+}
+
+.countryBox {
+  margin: 5px;
+  position: relative;
+  text-align: center;
+  border: 1px solid $lightGrey;
+  .countryText {
+    @include position(absolute, $top: 50%, $left: 66.6%);
+    @include translate(-50%, -50%);
+    h4 {
+      margin-top: 15px;
+    }
+  }
+}
+
+.imgBox {
+  padding: 6px;
+  text-align: center;
+  img {
+    width: 100%;
+  }
+}
+
+// table containing posts of one country
+.tableContainer {
+  //background: $bgGrey;
+  padding: 30px;
+}
+
+// view post page
+.postBox {
+  @include border-radius(5px);
+  border: 2px solid $lightGrey;
+  margin: 0 0 10px 0;
+  display: flex;
+}
+
+.postSide {
+  text-align: center;
+  background: $lightGrey;
+  img {
+    width: 50%;
+    margin: 15px auto;
+  }
+  a {
+    text-decoration: none;
+  }
+}
+
+// comment
+.commentBox {
+  @extend .postBox;
+}
+
+.commentSide {
+  @extend .postSide;
+}
