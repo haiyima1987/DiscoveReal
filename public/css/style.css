@@ -1,4 +1,7 @@
 @import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600);
+* {
+  border: 1px dashed black; }
+
 html, body {
   margin: 0;
   padding: 0; }
@@ -121,6 +124,20 @@ html, body {
     margin: 15px auto; }
   .postSide a, .commentSide a, .profileSide a {
     text-decoration: none; }
+
+.postContent {
+  position: relative; }
+
+.postBtmBar, .commentBtmBar {
+  padding: 0;
+  position: absolute;
+  right: 15px;
+  bottom: 10px;
+  left: 15px; }
+  .postBtmBar .btnEdit, .commentBtmBar .btnEdit {
+    position: absolute;
+    right: 0;
+    bottom: 0; }
 
 #imgForm {
   display: none; }

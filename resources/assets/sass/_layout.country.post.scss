@@ -54,6 +54,10 @@
   }
 }
 
+.postContent {
+  position: relative;
+}
+
 // comment
 .commentBox {
   @extend .postBox;
@@ -61,4 +65,17 @@
 
 .commentSide {
   @extend .postSide;
+}
+
+// bottom section in post
+.postBtmBar {
+  padding: 0;
+  @include position(absolute, $bottom: 10px, $right: 15px, $left: 15px);
+  .btnEdit {
+    @include position(absolute, $bottom: 0, $right: 0);
+  }
+}
+
+.commentBtmBar {
+  @extend .postBtmBar;
 }

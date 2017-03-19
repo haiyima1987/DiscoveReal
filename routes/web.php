@@ -61,6 +61,11 @@ Route::group(['prefix' => 'post'], function () {
             'uses' => 'PostController@removePost',
             'as' => 'post.remove'
         ]);
+
+        Route::get('/pageToPdf/{post}', [
+            'uses' => 'PostController@generatePdfFromView',
+            'as' => 'post.viewToPdf'
+        ]);
     });
 });
 

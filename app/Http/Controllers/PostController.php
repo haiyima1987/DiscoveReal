@@ -9,6 +9,8 @@ use App\Location;
 use App\Photo;
 use App\Post;
 use App\User;
+//use Barryvdh\DomPDF\Facade as PDF;
+use Barryvdh\Snappy\Facades\SnappyPdf as PDF;
 use Carbon\Carbon;
 use Gate;
 use Illuminate\Http\Request;
@@ -81,7 +83,7 @@ class PostController extends Controller
 //        $user = User::find($post->user_id);
         $id = Session::has('id') ? Session::get('id') : null;
         $user = User::find($id);
-        return view('posts.view', compact('post', 'comments', 'photos', 'user', 'self'));
+        return view('posts.view', compact('post', 'comments', 'photos', 'user'));
     }
 
     public function editPost(Post $post)
@@ -150,5 +152,17 @@ class PostController extends Controller
             return $location->id;
         }
         return $location->id; // first() returns an object
+    }
+
+    public function generatePdfFromView(Post $post)
+    {
+        $comments = $post->comments;
+        $photos = $post->photos;
+//        $user = User::find($post->user_id);
+//        $id = Session::has('id') ? Session::get('id') : null;
+//        $user = User::find($id);
+        $pdf = PDF::loadView('posts.viewToPdf', compact('post', 'comments', 'photos'));
+        return $pdf->download('download.pdf');
+//        return view('posts.viewToPdf', compact('post', 'comments', 'photos'));
     }
 }
