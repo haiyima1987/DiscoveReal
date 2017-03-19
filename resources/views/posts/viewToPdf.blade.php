@@ -47,7 +47,6 @@
                 <small>{{ $post->created_at->format('d-M-Y, H:i A') }}</small>
             </p>
             <hr>
-
             {{--@foreach($photos->chunk(2) as $photoChunk)--}}
                 {{--<div class="row">--}}
                     {{--@foreach($photoChunk as $photo)--}}
@@ -59,7 +58,6 @@
                     {{--@endforeach--}}
                 {{--</div>--}}
             {{--@endforeach--}}
-
             <p>{!! $post->content !!}</p>
         </div>
     </div>

@@ -1,7 +1,4 @@
 @import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600);
-* {
-  border: 1px dashed black; }
-
 html, body {
   margin: 0;
   padding: 0; }
@@ -46,6 +43,8 @@ html, body {
 
 .table-condensed .tdHead {
   padding-left: 20px; }
+.table-condensed > tbody > tr > td {
+  vertical-align: middle; }
 
 .sidebar {
   -webkit-border-radius: 0;
@@ -118,15 +117,21 @@ html, body {
 
 .postSide, .commentSide, .profileSide {
   text-align: center;
-  background: #ababab; }
+  background: #ababab;
+  padding: 20px; }
   .postSide img, .commentSide img, .profileSide img {
     width: 50%;
     margin: 15px auto; }
   .postSide a, .commentSide a, .profileSide a {
     text-decoration: none; }
+  .postSide p, .commentSide p, .profileSide p {
+    margin: 0 0 5px 0; }
 
 .postContent {
-  position: relative; }
+  padding-bottom: 50px; }
+
+.commentContent {
+  padding: 20px 20px 10px 20px; }
 
 .postBtmBar, .commentBtmBar {
   padding: 0;
