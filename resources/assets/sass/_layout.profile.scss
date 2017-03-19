@@ -1,0 +1,22 @@
+// form to change profile image
+#imgForm {
+  display: none;
+}
+
+// profile image headBar
+.headBar {
+  margin-bottom: 20px;
+  padding: 0;
+}
+
+// profile page side information section
+.profileBox {
+  @extend .postBox;
+}
+
+.profileSide {
+  @extend .postSide;
+  img {
+    width: 80%;
+  }
+}

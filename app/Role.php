@@ -10,7 +10,7 @@ class Role extends Model
         'id', 'role'
     ];
 
-    public function Users()
+    public function users()
     {
         return $this->hasMany('App\User');
     }

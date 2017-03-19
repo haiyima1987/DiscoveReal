@@ -24,7 +24,7 @@ class CountriesTableSeeder extends Seeder
         $country->save();
         $country = new Country(['name' => 'Italy', 'path' => 'italy.png']);
         $country->save();
-        $country = new Country(['name' => 'The Netherlands', 'path' => 'netherlands.png']);
+        $country = new Country(['name' => 'Netherlands', 'path' => 'netherlands.png']);
         $country->save();
         $country = new Country(['name' => 'Norway', 'path' => 'norway.png']);
         $country->save();

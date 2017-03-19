@@ -63,11 +63,11 @@
                 {!! Form::select('category', $categories, null, ['class'=>'form-control', 'placeholder'=>'Select category']) !!}
             </div>
         </div>
-        <div class="form-group {{ $errors->has('photo') ? ' has-error' : '' }}">
-            {!! Form::label('photo', 'Upload image', ['class'=>'col-form-label']) !!}
-            {!! Form::file('photo', ['class'=>'form-control']) !!}
-            @if ($errors->has('photo'))
-                <span class="help-block"><strong>{{ $errors->first('photo') }}</strong></span>
+        <div class="form-group {{ $errors->has('photos[]') ? ' has-error' : '' }}">
+            {!! Form::label('photos[]', 'Upload images', ['class'=>'col-form-label']) !!}
+            {!! Form::file('photos[]', ['class'=>'form-control', 'multiple']) !!}
+            @if ($errors->has('photos[]'))
+                <span class="help-block"><strong>{{ $errors->first('photos[]') }}</strong></span>
             @endif
         </div>
         <div class="form-group {{ $errors->has('postContent') ? ' has-error' : '' }}">

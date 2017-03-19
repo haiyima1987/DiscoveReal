@@ -180,7 +180,9 @@ return [
         Collective\Html\HtmlServiceProvider::class, // form helper
         Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class, // Laravel IDE helper
         Mews\Purifier\PurifierServiceProvider::class, // HTML purifier
-        Intervention\Image\ImageServiceProvider::class // intervention image manipulator
+        Intervention\Image\ImageServiceProvider::class, // intervention image manipulator
+//        Barryvdh\DomPDF\ServiceProvider::class, // pdf file generator
+        Barryvdh\Snappy\ServiceProvider::class, // pdf file generator
 
     ],
 
@@ -234,7 +236,10 @@ return [
         'Form' => Collective\Html\FormFacade::class,
         'Html' => Collective\Html\HtmlFacade::class,
         'Purifier' => Mews\Purifier\Facades\Purifier::class,
-        'Image' => Intervention\Image\Facades\Image::class
+        'Image' => Intervention\Image\Facades\Image::class,
+//        'PDF' => Barryvdh\DomPDF\Facade::class,
+        'PDF' => Barryvdh\Snappy\Facades\SnappyPdf::class,
+        'SnappyImage' => Barryvdh\Snappy\Facades\SnappyImage::class,
 
     ],
 

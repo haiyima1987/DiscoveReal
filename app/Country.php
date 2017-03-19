@@ -16,4 +16,9 @@ class Country extends Model
     {
         return $this->dir . $value;
     }
+
+    public function locations()
+    {
+        return $this->hasMany('App\Location');
+    }
 }

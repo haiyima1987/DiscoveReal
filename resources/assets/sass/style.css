@@ -13,6 +13,14 @@ p {
   margin: 0;
   padding: 0; }
 
+.bg {
+  background-image: url("./../img/bg0.jpg");
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0; }
+
 .leftCol {
   padding: 0; }
 
@@ -44,5 +52,8 @@ p {
   text-align: center; }
   .imgBox img {
     width: 100%; }
+
+#imgForm {
+  display: none; }
 
 /*# sourceMappingURL=style.css.map */

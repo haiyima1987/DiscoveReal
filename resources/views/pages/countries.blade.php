@@ -1,31 +1,44 @@
 @extends('master')
 
+@section('banner')
+    <div class="banner">
+        <img src="{{ url('img/banner2.png') }}" alt="banner">
+        <div class="bannerText">
+            <h2><strong>Choose Your Destination</strong></h2>
+        </div>
+    </div>
+@endsection
+
 @section('content')
 
-    @foreach($countries->chunk(3) as $countryChunk)
+    <div class="content">
+        @foreach($countries->chunk(3) as $countryChunk)
 
-        <div class="row">
+            <div class="row">
 
-            @foreach($countryChunk as $country)
+                @foreach($countryChunk as $country)
 
-                <div class="col-sm-4 frame">
-                    <a href="{{ route('countries', ['id' => $country->id]) }}">
-                        <div class="countryBox clearfix">
-                            <div class="col-xs-6 imgBox">
-                                <img src="{{ $country->path }}" alt="{{ $country->id }}">
+                    <div class="col-sm-4 frame">
+                        <a href="{{ route('countries', ['id' => $country->id]) }}">
+                            <div class="countryBox clearfix">
+                                <div class="col-xs-4 imgBox">
+                                    <img src="{{ $country->path }}" alt="{{ $country->id }}">
+                                </div>
+                                <div class="countryText col-xs-8">
+                                    <h4>{{ $country->name }}</h4>
+                                    <p>
+                                        <small>{{ $count = $postCount[$country->id] }} {{ $count > 1 ? 'Posts' : 'Post' }}</small>
+                                    </p>
+                                </div>
                             </div>
-                            <div class="col-xs-6">
-                                <p>{{ $country->name }}</p>
-                                <p>{{ $count = $postCount[$country->id] }} {{ $count > 1 ? 'Posts' : 'Post' }}</p>
-                            </div>
-                        </div>
-                    </a>
-                </div>
+                        </a>
+                    </div>
 
-            @endforeach
+                @endforeach
 
-        </div>
+            </div>
 
-    @endforeach
+        @endforeach
+    </div>
 
 @endsection
