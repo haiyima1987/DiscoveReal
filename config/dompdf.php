@@ -109,7 +109,7 @@ return array(
          * The GD rendering backend is a little different than PDFLib and
          * CPDF. Several features of CPDF and PDFLib are not supported or do
          * not make any sense when creating image files.  For example,
-         * multiple pages are not supported, nor are PDF 'objects'.  Have a
+         * multiple page are not supported, nor are PDF 'objects'.  Have a
          * look at {@link GD_Adapter} for more information.  GD support is
          * experimental, so use it at your own risk.
          *
@@ -204,7 +204,7 @@ return array(
          * inline PHP contained within <script type="text/php"> ... </script> tags.
          *
          * Enabling this for documents you do not trust (e.g. arbitrary remote html
-         * pages) is a security risk.  Set this option to false if you wish to process
+         * page) is a security risk.  Set this option to false if you wish to process
          * untrusted documents.
          *
          * @var bool
@@ -234,7 +234,7 @@ return array(
          * $dompdf = new DOMPDF(, $dompdf->load_html(...,
          * This allows anonymous users to download legally doubtful internet content which on
          * tracing back appears to being downloaded by your server, or allows malicious php code
-         * in remote html pages to be executed by your server with your account privileges.
+         * in remote html page to be executed by your server with your account privileges.
          *
          * @var bool
          */

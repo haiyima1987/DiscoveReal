@@ -14,6 +14,7 @@
   background: $secondDarkGrey;
   position: fixed;
   z-index: 50;
+  @include box-shadow(5px, 5px, 10px, $lightGrey);
 }
 
 .rightCol {
@@ -24,6 +25,9 @@
 .banner {
   height: 150px;
   position: relative;
+  @include box-shadow(5px, 5px, 10px, $lightGrey);
+  z-index: 60;
+  //@include position(absolute, $top: 0, $right: 0, $left: 0);
   img {
     width: 100%;
     height: 100%;
@@ -37,6 +41,9 @@
 // content container of each separate page
 .content {
   padding: 20px;
+  //background: url('../img/bgGreyTexture.jpg') repeat;
+  //background-size: 50%;
+  //height: 100%;
 }
 
 // move first element of a td to the right a little bit

@@ -1,4 +1,4 @@
-@extends('master')
+@extends('layout.master')
 
 @section('banner')
     <div class="banner">

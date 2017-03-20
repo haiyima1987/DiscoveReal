@@ -10,7 +10,9 @@
   margin: 5px;
   position: relative;
   text-align: center;
+  background: $bgWhite;
   border: 1px solid $lightGrey;
+  @include box-shadow(5px, 5px, 10px, $lightGrey);
   .countryText {
     @include position(absolute, $top: 50%, $left: 66.6%);
     @include translate(-50%, -50%);
@@ -23,6 +25,7 @@
 .imgBox {
   padding: 6px;
   text-align: center;
+  background: $bgWhite;
   img {
     width: 100%;
   }
@@ -36,19 +39,22 @@
 
 // view post page
 .postBox {
+  background: $bgWhite;
   @include border-radius(5px);
-  border: 2px solid $lightGrey;
+  border: 2px solid $midGrey;
   margin: 0 0 10px 0;
   display: flex;
+  @include box-shadow(5px, 5px, 10px, $lightGrey);
 }
 
 .postSide {
   text-align: center;
+  @include border-radius-separate(3px, 0px, 0px, 3px);
   background: $lightGrey;
   padding: 20px;
   img {
-    width: 50%;
-    margin: 15px auto;
+    width: 80%;
+    margin: 0 auto;
   }
   a {
     text-decoration: none;
@@ -61,6 +67,16 @@
 .postContent {
   //position: relative;
   padding-bottom: 50px;
+  .postImgBox {
+    margin-bottom: 20px;
+    .col-sm-6 {
+      padding: 5px;
+    }
+    img {
+      width: 100%;
+      border: 1px solid $midGrey;
+    }
+  }
 }
 
 // comment
@@ -87,4 +103,17 @@
 
 .commentBtmBar {
   @extend .postBtmBar;
+}
+
+// create edit form
+.formCreateEdit {
+  .leftElem {
+    padding: 0 10px 0 0;
+  }
+  .rightElem {
+    padding: 0 0 0 10px;
+  }
+  span {
+    @include position(relative, $top: 8px);
+  }
 }

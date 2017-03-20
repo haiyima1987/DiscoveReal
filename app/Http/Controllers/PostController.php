@@ -27,7 +27,7 @@ class PostController extends Controller
 
         $categories = Category::all()->pluck('name', 'id');
         $countries = Country::all()->pluck('name', 'id');
-        return view('posts.create', compact('countries', 'categories'));
+        return view('post.create', compact('countries', 'categories'));
     }
 
     public function publishPost(PostRequest $request)
@@ -55,6 +55,7 @@ class PostController extends Controller
 
             foreach ($request->file('photos') as $photo) {
                 $name = time() . $counter . '.' . $photo->getClientOriginalExtension();
+//                $photo = Image::make($photo)->insert('public/img/watermark.png');
                 $imgPath = Storage::putFileAs('storage/img/posts', $photo, $name);
                 $photo = new Photo([
                     'post_id' => $post->id,
@@ -83,7 +84,7 @@ class PostController extends Controller
 //        $user = User::find($post->user_id);
         $id = Session::has('id') ? Session::get('id') : null;
         $user = User::find($id);
-        return view('posts.view', compact('post', 'comments', 'photos', 'user'));
+        return view('post.view', compact('post', 'comments', 'photos', 'user'));
     }
 
     public function editPost(Post $post)
@@ -96,7 +97,7 @@ class PostController extends Controller
         $category = Category::find($post->category_id);
         $location = Location::find($post->location_id);
         $country = Country::find($location->country_id);
-        return view('posts.edit', compact('post', 'location', 'categories', 'category', 'countries', 'country'));
+        return view('post.edit', compact('post', 'location', 'categories', 'category', 'countries', 'country'));
     }
 
     public function updatePost(PostRequest $request, Post $post)
@@ -109,12 +110,35 @@ class PostController extends Controller
         $countryId = $request->country;
         $locationId = $this->getLocationId($attraction, $address, $city, $countryId);
 
-        $post->update([
+        $updateRes = $post->update([
             'title' => strtolower($request->title),
             'content' => clean($request->postContent),
             'location_id' => $locationId,
             'category_id' => $request->category
         ]);
+
+//        if ($updateRes){
+//            Photo::where()
+//            $counter = 0;
+//
+//            foreach ($request->file('photos') as $photo) {
+//                $name = time() . $counter . '.' . $photo->getClientOriginalExtension();
+////                $photo = Image::make($photo)->insert('public/img/watermark.png');
+//                $imgPath = Storage::putFileAs('storage/img/posts', $photo, $name);
+//                $photo = new Photo([
+//                    'post_id' => $post->id,
+//                    'imgPath' => $imgPath
+//                ]);
+//
+//                $result = $photo->save();
+//                if (!$result) {
+//                    $errors = ['file' => 'Error saving file'];
+//                    return redirect()->back()->withErrors($errors);
+//                }
+//                $counter++;
+//            }
+//
+//        }
 
         return redirect()->route('post.view', ['id' => $post->id]);
     }
@@ -161,8 +185,8 @@ class PostController extends Controller
 //        $user = User::find($post->user_id);
 //        $id = Session::has('id') ? Session::get('id') : null;
 //        $user = User::find($id);
-        $pdf = PDF::loadView('posts.viewToPdf', compact('post', 'comments', 'photos'));
+        $pdf = PDF::loadView('post.viewToPdf', compact('post', 'comments', 'photos'));
         return $pdf->download('download.pdf');
-//        return view('posts.viewToPdf', compact('post', 'comments', 'photos'));
+//        return view('post.viewToPdf', compact('post', 'comments', 'photos'));
     }
 }

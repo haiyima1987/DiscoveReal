@@ -8,21 +8,15 @@ use App\Http\Requests\SignupRequest;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\MessageBag;
-use Intervention\Image\ImageManager;
 use Intervention\Image\ImageManagerStatic as Image;
-
-//use Intervention\Image\ImageManager;
-//use Intervention\Image\Image;
 
 class UserController extends Controller
 {
     public function showSignup()
     {
-        return view('pages.signup');
+        return view('page.signup');
     }
 
     public function signUpUser(SignupRequest $request)
@@ -44,15 +38,15 @@ class UserController extends Controller
         if ($user->save()) {
             Auth::login($user);
             Session::put('id', $user->id);
-            return view('pages.profile', compact('user'));
+            return view('user.profile', compact('user'));
         } else {
-            return view('pages.signup');
+            return view('page.signup');
         }
     }
 
     public function showLogin()
     {
-        return view('pages.login');
+        return view('page.login');
     }
 
     public function logInUser(LoginRequest $request)
@@ -83,7 +77,7 @@ class UserController extends Controller
     public function viewAllPosts(User $user)
     {
         $posts = $user->posts;
-        return view('pages.allPosts', compact('user', 'posts'));
+        return view('user.userPosts', compact('user', 'posts'));
     }
 
     public function viewProfile()
@@ -91,7 +85,7 @@ class UserController extends Controller
         $id = Session::has('id') ? Session::get('id') : null;
         $user = User::find($id);
         $posts = $user->posts;
-        return view('pages.profile', compact('user', 'posts'));
+        return view('user.profile', compact('user', 'posts'));
     }
 
     public function updateProfileImage(Request $request, User $user)
@@ -104,6 +98,11 @@ class UserController extends Controller
         $img = $request->file('photo');
         $name = time() . '.' . $img->getClientOriginalExtension();
         $resizedImg = Image::make($img)->resize(250, 250);
+
+        $watermark = Image::make(public_path('img/watermark.png'))->resize(240, 60);
+        $resizedImg->insert($watermark, 'bottom-right', 0, 0);
+
+//        return $resizedImg->response();
 
         // first delete old picture
         if ($user->photo) {
