@@ -35,7 +35,7 @@
                 </div>
                 <br>
                 <div class="form-group">
-                    <div class="col-sm-6 col-sm-offset-3">
+                    <div class="col-sm-9 col-sm-offset-3">
                         <div class="checkbox">
                             <label><input type="checkbox" name="remember" value="1"> Remember Me</label>
                         </div>
@@ -43,7 +43,7 @@
                 </div>
                 <br>
                 <div class="form-group row">
-                    <div class="col-sm-6 col-sm-offset-3">
+                    <div class="col-sm-9 col-sm-offset-3">
                         {!! Form::submit('Log In', ['class'=>'btnSignUpLogIn btn btn-success pull-left']) !!}
                         <p class="text-left">
                             <a class="btn btn-link" href="{{ route('password.requestForm') }}">

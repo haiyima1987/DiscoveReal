@@ -97,7 +97,7 @@ class PostController extends Controller
         $category = Category::find($post->category_id);
         $location = Location::find($post->location_id);
         $country = Country::find($location->country_id);
-        return view('post.edit', compact('post', 'location', 'categories', 'category', 'countries', 'country'));
+        return view('post.editPost', compact('post', 'location', 'categories', 'category', 'countries', 'country'));
     }
 
     public function updatePost(PostRequest $request, Post $post)

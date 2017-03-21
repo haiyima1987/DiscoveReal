@@ -94,19 +94,19 @@
                              src="{{ $author->photo ? url($author->photo) : url('img/avatar.png') }}"
                              alt="{{ $author->id }}">
                         <hr>
-                        <a href="#"
-                           data-toggle="modal"
-                           data-target="#userInfo"
-                           data-img="{{ ($author = $post->user)->photo ? url($author->photo) : url('img/avatar.png') }}"
-                           data-username="{{ $author->username }}"
-                           data-role="{{ $author->role->role }}"
-                           data-bday="{{ $author->birthday }}"
-                           data-location="{{ $author->city. ', '.$author->country }}"
-                           data-year="{{ $author->created_at->format('d-M-Y') }}"
-                           data-count="{{ count($author->posts) }}"
-                           data-route="{{ route('user.allPosts', $author) }}">
-                            {{ $post->user->username }}
-                        </a>
+                        <h4><a href="#"
+                               data-toggle="modal"
+                               data-target="#userInfo"
+                               data-img="{{ ($author = $post->user)->photo ? url($author->photo) : url('img/avatar.png') }}"
+                               data-username="{{ $author->username }}"
+                               data-role="{{ $author->role->role }}"
+                               data-bday="{{ $author->birthday }}"
+                               data-location="{{ $author->city. ', '.$author->country }}"
+                               data-year="{{ $author->created_at->format('d-M-Y') }}"
+                               data-count="{{ count($author->posts) }}"
+                               data-route="{{ route('user.allPosts', $author) }}">
+                                {{ $post->user->username }}
+                            </a></h4>
                         <p>{{ ucwords($author->role->role) }}</p>
                         <p>{{ $author->city . ', '. $author->country }}</p>
                         <p>Date Joined: {{ $author->created_at->diffForHumans() }}</p>

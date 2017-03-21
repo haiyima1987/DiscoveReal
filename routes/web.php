@@ -124,6 +124,16 @@ Route::group(['prefix' => 'user'], function () {
             'as' => 'user.viewProfile'
         ]);
 
+        Route::get('/editProfile', [
+            'uses' => 'UserController@editProfile',
+            'as' => 'user.editProfile'
+        ]);
+
+        Route::put('/updateProfile', [
+            'uses' => 'UserController@updateProfile',
+            'as' => 'user.updateProfile'
+        ]);
+
         Route::get('/logout', [
             'uses' => 'UserController@logOutUser',
             'as' => 'user.logOutUser'

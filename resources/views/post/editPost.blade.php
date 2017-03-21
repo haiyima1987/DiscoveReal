@@ -19,11 +19,14 @@
         <div class="content">
             <div class="formCreateEdit clearfix">
                 <div class="alert alert-danger clearfix">
-                    {!! Form::open(['method'=>'delete', 'action'=>['PostController@removePost', $post], 'files'=>true]) !!}
-                    {{ csrf_field() }}
-                    {!! Form::submit('Delete', ['class'=>'btn btn-danger pull-right']) !!}
+                    {{--{!! Form::open(['method'=>'delete', 'action'=>['PostController@removePost', $post], 'files'=>true]) !!}--}}
+                    {{--{{ csrf_field() }}--}}
+                    {{--{!! Form::submit('Delete', ['class'=>'btn btn-danger pull-right']) !!}--}}
+                    <a href="#"
+                       data-toggle="modal"
+                       data-target="postDelete">Delete</a>
                     <span>Click the button on the right to delete the post</span>
-                    {!! Form::close() !!}
+                    {{--{!! Form::close() !!}--}}
                 </div>
 
                 {!! Form::open(['method'=>'put', 'action'=>['PostController@updatePost', $post], 'files'=>true]) !!}
@@ -92,6 +95,40 @@
                 {!! Form::submit('Update', ['class'=>'btn btn-success pull-right']) !!}
 
                 {!! Form::close() !!}
+            </div>
+        </div>
+    </div>
+
+    {{--modal--}}
+    <div class="modal fade" id="postDelete"
+         tabindex="-1" role="dialog"
+         aria-labelledby="favoritesModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close"
+                            data-dismiss="modal"
+                            aria-label="Close">
+                        <span aria-hidden="true">&times;</span></button>
+                    {{--<h4 class="modal-title"--}}
+                    {{--id="userHeader">Title</h4>--}}
+                </div>
+                <div class="modal-body clearfix">
+                    {!! Form::open(['method'=>'delete', 'action'=>['PostController@removePost', $post], 'files'=>true]) !!}
+                    {{ csrf_field() }}
+                </div>
+                <div class="modal-footer">
+                    <button type="button"
+                            class="btn btn-default pull-left"
+                            data-dismiss="modal">Close
+                    </button>
+                    {!! Form::submit('Delete', ['class'=>'btn btn-danger pull-right']) !!}
+                    {!! Form::close() !!}
+                    {{--<a href="#"--}}
+                    {{--id="userRoute"--}}
+                    {{--class="btn btn-primary pull-right">View Posts--}}
+                    {{--</a>--}}
+                </div>
             </div>
         </div>
     </div>

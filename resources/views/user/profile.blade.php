@@ -23,16 +23,6 @@
                          src="{{ $user->photo ? url($user->photo) : url('img/avatar.png') }}"
                          alt="{{ $user->id }}">
                 </div>
-                {!! Form::open(['id' => 'imgForm', 'method'=>'post', 'action'=>['UserController@updateProfileImage', $user], 'files'=>true]) !!}
-                {{ csrf_field() }}
-                {!! Form::file('photo', ['id'=>'btnFileUpload']) !!}
-                {!! Form::submit('Update') !!}
-                {!! Form::close() !!}
-
-                @if ($errors->has('photo'))
-                    <span class="help-block"><strong>{{ $errors->first('photo') }}</strong></span>
-                @endif
-                <button id="btnClickHelper" class="btn btn-primary">Change Image</button>
                 <hr>
                 <h5>{{ $user->username }}</h5>
                 <h5>{{ $user->role->role }}</h5>
@@ -42,6 +32,8 @@
                 <p><i class="fa fa-envelope-o"></i> {{ $user->email }}</p>
                 <p><i class="fa fa-gift"></i> {{ $user->birthday }}</p>
                 <p><i class="fa fa-map-marker"></i> {{ $user->city. ', '.$user->country }}</p>
+
+                <a class="btn btn-success btnProfileEdit" href="{{ route('user.editProfile') }}">Edit Profile</a>
             </div>
 
             <div class="profileContent col-sm-9">
@@ -91,8 +83,4 @@
 
     </div>
 
-@endsection
-
-@section('scripts')
-    {!! Html::script('js/profile.js') !!}
 @endsection

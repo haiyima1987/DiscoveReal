@@ -26,8 +26,8 @@ class UserController extends Controller
             'username' => $request->username,
             'password' => bcrypt($request->password),
             'photo' => $request->photo,
-            'first_name' => $request->firstName,
-            'last_name' => $request->lastName,
+            'firstName' => $request->firstName,
+            'lastName' => $request->lastName,
             'email' => $request->email,
             'birthday' => $request->birthday,
             'gender' => $request->gender,
@@ -102,8 +102,6 @@ class UserController extends Controller
         $watermark = Image::make(public_path('img/watermark.png'))->resize(240, 60);
         $resizedImg->insert($watermark, 'bottom-right', 0, 0);
 
-//        return $resizedImg->response();
-
         // first delete old picture
         if ($user->photo) {
             $oldFilePath = 'public/img/users/' . $user->getOriginal()['photo'];
@@ -137,6 +135,45 @@ class UserController extends Controller
                 'success' => false,
                 'msg' => 'Failed to save image'
             ], 200);
+        }
+    }
+
+    public function editProfile()
+    {
+        $id = Session::has('id') ? Session::get('id') : null;
+        $user = User::find($id);
+        return view('user.edit', compact('user'));
+    }
+
+    public function updateProfile(Request $request)
+    {
+        $this->validate($request, [
+            'password' => 'required|min:8',
+            'password_confirmation' => 'required|min:8|same:password',
+            'firstName' => 'required',
+            'lastName' => 'required',
+            'birthday' => 'required',
+            'gender' => 'required',
+            'city' => 'required',
+            'country' => 'required'
+        ]);
+
+        $id = Session::has('id') ? Session::get('id') : null;
+        $user = User::find($id);
+        $result = $user->update([
+            'password' => bcrypt($request->password),
+            'firstName' => $request->firstName,
+            'lastName' => $request->lastName,
+            'birthday' => $request->birthday,
+            'gender' => $request->gender,
+            'city' => $request->city,
+            'country' => $request->country
+        ]);
+
+        if ($result) {
+            return redirect()->route('user.viewProfile');
+        } else {
+            return view('page.signup');
         }
     }
 }

@@ -17,6 +17,9 @@
 // profile page side information section
 .profileBox {
   @extend .postBox;
+  .btnProfileEdit {
+    margin-top: 20px;
+  }
 }
 
 .profileSide {

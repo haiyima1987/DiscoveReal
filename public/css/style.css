@@ -192,6 +192,9 @@ html, body {
 #profileImg {
   margin: 0 0 10px 0; }
 
+.profileBox .btnProfileEdit {
+  margin-top: 20px; }
+
 .profileSide img {
   width: 80%; }
 
