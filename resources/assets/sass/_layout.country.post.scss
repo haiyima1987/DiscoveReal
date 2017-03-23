@@ -113,7 +113,7 @@
   .rightElem {
     padding: 0 0 0 10px;
   }
-  span {
+  #spanDeleteMsg {
     @include position(relative, $top: 8px);
   }
 }

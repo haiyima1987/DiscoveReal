@@ -66,8 +66,29 @@ Route::group(['prefix' => 'post'], function () {
             'uses' => 'PostController@generatePdfFromView',
             'as' => 'post.viewToPdf'
         ]);
+
+        Route::get('/getPostImages/{id}', [
+            'uses' => 'ImageController@getPostImages',
+            'as' => 'post.getPostImages'
+        ]);
+
+        Route::post('/postImageUpload', [
+            'uses' => 'ImageController@postImageUpload',
+            'as' => 'post.imageUpload',
+        ]);
+
+        Route::post('/postImageDelete', [
+            'uses' => 'ImageController@postImageDelete',
+            'as' => 'post.imageDelete'
+        ]);
     });
 });
+
+Route::resource('test', 'TestController');
+
+//Route::get('/a', ['as' => 'upload', 'uses' => 'ImageController@getUpload']);
+//Route::post('upload', ['as' => 'upload-post', 'uses' => 'ImageController@postUpload']);
+//Route::post('upload/delete', ['as' => 'upload-remove', 'uses' => 'ImageController@deleteUpload']);
 
 Route::group(['prefix' => 'comment'], function () {
 
@@ -81,8 +102,6 @@ Route::group(['prefix' => 'comment'], function () {
 });
 
 Route::group(['prefix' => 'user'], function () {
-
-//    Route::resource('api', 'ApiController');
 
     Route::get('/allPosts/{user}', [
         'uses' => 'UserController@viewAllPosts',
@@ -115,7 +134,7 @@ Route::group(['prefix' => 'user'], function () {
     Route::group(['middleware' => 'auth'], function () {
 
         Route::post('/updateImg/{user}', [
-            'uses' => 'UserController@updateProfileImage',
+            'uses' => 'ImageController@profileImageUpload',
             'as' => 'user.updateImg'
         ]);
 

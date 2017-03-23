@@ -178,7 +178,7 @@ html, body {
   padding: 0 10px 0 0; }
 .formCreateEdit .rightElem {
   padding: 0 0 0 10px; }
-.formCreateEdit span {
+.formCreateEdit #spanDeleteMsg {
   position: relative;
   top: 8px; }
 

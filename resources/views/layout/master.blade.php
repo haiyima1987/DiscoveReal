@@ -20,7 +20,7 @@
             crossorigin="anonymous"></script>
     {!! Html::style('font-awesome/css/font-awesome.min.css') !!}
     {!! Html::style('css/style.css') !!}
-    @yield('stylesheet')
+    @yield('head')
 </head>
 <body>
 

@@ -4,13 +4,13 @@ namespace App\Http\Controllers;
 
 use App;
 use App\Http\Requests\LoginRequest;
+use App\Http\Requests\ProfileRequest;
 use App\Http\Requests\SignupRequest;
+use App\Post;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
-use Illuminate\Support\Facades\Storage;
-use Intervention\Image\ImageManagerStatic as Image;
 
 class UserController extends Controller
 {
@@ -56,8 +56,6 @@ class UserController extends Controller
 
         if (Auth::attempt($request->only($login, 'password'))) {
             $user = Auth::User();
-            // any specific info??
-            Session::put('id', $user->id);
             return redirect()->route('user.viewProfile');
         } else {
             $error = [];
@@ -76,90 +74,27 @@ class UserController extends Controller
 
     public function viewAllPosts(User $user)
     {
-        $posts = $user->posts;
+        $posts = Post::where('published', 1)->with('user')->get();
         return view('user.userPosts', compact('user', 'posts'));
     }
 
     public function viewProfile()
     {
-        $id = Session::has('id') ? Session::get('id') : null;
-        $user = User::find($id);
-        $posts = $user->posts;
+        $user = Auth::user();
+        $posts = Post::where('published', 1)->with('user')->get();
         return view('user.profile', compact('user', 'posts'));
-    }
-
-    public function updateProfileImage(Request $request, User $user)
-    {
-        $this->validate($request, [
-            'photo' => 'required|image|max:512|mimes:jpeg,jpg,bmp,png',
-        ]);
-
-        // get file and define name then resize
-        $img = $request->file('photo');
-        $name = time() . '.' . $img->getClientOriginalExtension();
-        $resizedImg = Image::make($img)->resize(250, 250);
-
-        $watermark = Image::make(public_path('img/watermark.png'))->resize(240, 60);
-        $resizedImg->insert($watermark, 'bottom-right', 0, 0);
-
-        // first delete old picture
-        if ($user->photo) {
-            $oldFilePath = 'public/img/users/' . $user->getOriginal()['photo'];
-            Storage::delete($oldFilePath);
-        }
-
-        // then store new picture
-        $storagePath = 'public/img/users/' . $name;
-        $saveRes = Storage::put($storagePath, $resizedImg->stream());
-
-        if ($saveRes) {
-            $updateRes = $user->update(['photo' => $name]);
-            if ($updateRes) {
-                return response()->json([
-                    'success' => true,
-                    // attention!!!! here you must return a url to the view!!!!
-                    // DO NOT quote
-                    'filePath' => url($user->photo)
-//                    'filePath' => $name
-                ], 200);
-            } else {
-                return response()->json([
-                    'success' => false,
-                    'msg' => 'Failed to update image'
-                ], 200);
-            }
-//            return redirect()->route('user.profile');
-//            return $resizedImg->response();
-        } else {
-            return response()->json([
-                'success' => false,
-                'msg' => 'Failed to save image'
-            ], 200);
-        }
     }
 
     public function editProfile()
     {
-        $id = Session::has('id') ? Session::get('id') : null;
-        $user = User::find($id);
-        return view('user.edit', compact('user'));
+        $user = Auth::user();
+        return view('user.editProfile', compact('user'));
     }
 
-    public function updateProfile(Request $request)
+    public function updateProfile(ProfileRequest $request)
     {
-        $this->validate($request, [
-            'password' => 'required|min:8',
-            'password_confirmation' => 'required|min:8|same:password',
-            'firstName' => 'required',
-            'lastName' => 'required',
-            'birthday' => 'required',
-            'gender' => 'required',
-            'city' => 'required',
-            'country' => 'required'
-        ]);
+        $user = Auth::user();
 
-        $id = Session::has('id') ? Session::get('id') : null;
-        $user = User::find($id);
         $result = $user->update([
             'password' => bcrypt($request->password),
             'firstName' => $request->firstName,

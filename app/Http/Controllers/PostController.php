@@ -14,6 +14,7 @@ use Barryvdh\Snappy\Facades\SnappyPdf as PDF;
 use Carbon\Carbon;
 use Gate;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
 use Mews\Purifier\Facades\Purifier;
@@ -27,12 +28,27 @@ class PostController extends Controller
 
         $categories = Category::all()->pluck('name', 'id');
         $countries = Country::all()->pluck('name', 'id');
-        return view('post.create', compact('countries', 'categories'));
+
+//        dd(Auth::user()->id);
+        $userId = Auth::user()->id;
+        $post = new Post([
+            'user_id' => $userId,
+            'title' => null,
+            'content' => null,
+            'rate' => null,
+            'location_id' => null,
+            'category_id' => null
+        ]);
+        $post->save();
+//        dd($post);
+        return view('post.create', compact('countries', 'categories', 'post'));
     }
 
     public function publishPost(PostRequest $request)
     {
-        $this->authorize('create', Post::class);
+        $post = Post::find($request->postId);
+        $this->authorize('update', $post);
+//        dd($post);
 
         $attraction = strtolower($request->attraction);
         $address = strtolower($request->address);
@@ -40,36 +56,18 @@ class PostController extends Controller
         $countryId = $request->country;
         $locationId = $this->getLocationId($attraction, $address, $city, $countryId);
 
-        $userId = Session::get('id');
-        $post = new Post([
+        $userId = Auth::user()->id;
+        $updateRes = $post->update([
             'user_id' => $userId,
             'title' => strtolower($request->title),
             'content' => Purifier::clean($request->postContent),
             'rate' => null,
             'location_id' => $locationId,
-            'category_id' => $request->category
+            'category_id' => $request->category,
+            'published' => 1
         ]);
 
-        if ($post->save()) {
-            $counter = 0;
-
-            foreach ($request->file('photos') as $photo) {
-                $name = time() . $counter . '.' . $photo->getClientOriginalExtension();
-//                $photo = Image::make($photo)->insert('public/img/watermark.png');
-                $imgPath = Storage::putFileAs('storage/img/posts', $photo, $name);
-                $photo = new Photo([
-                    'post_id' => $post->id,
-                    'imgPath' => $imgPath
-                ]);
-
-                $result = $photo->save();
-                if (!$result) {
-                    $errors = ['file' => 'Error saving file'];
-                    return redirect()->back()->withErrors($errors);
-                }
-                $counter++;
-            }
-
+        if ($updateRes) {
             return redirect()->route('post.view', $post);
         } else {
             $errors = ['post' => 'Error saving post'];
@@ -81,16 +79,13 @@ class PostController extends Controller
     {
         $comments = $post->comments;
         $photos = $post->photos;
-//        $user = User::find($post->user_id);
-        $id = Session::has('id') ? Session::get('id') : null;
-        $user = User::find($id);
+        $user = Auth::user();
         return view('post.view', compact('post', 'comments', 'photos', 'user'));
     }
 
     public function editPost(Post $post)
     {
         $this->authorize('update', $post);
-//        abort_unless(Gate::allows('update', $post), 403);
 
         $categories = Category::all()->pluck('name', 'id');
         $countries = Country::all()->pluck('name', 'id');
