@@ -16,11 +16,12 @@ class CreatePostsTable extends Migration
         Schema::create('posts', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id');
-            $table->string('title');
-            $table->text('content');
+            $table->string('title')->nullable();
+            $table->text('content')->nullable();
             $table->double('rate')->nullable();
-            $table->integer('location_id');
-            $table->integer('category_id');
+            $table->integer('location_id')->nullable();
+            $table->integer('category_id')->nullable();
+            $table->boolean('published')->default(0);
             $table->timestamps();
         });
     }
@@ -32,6 +33,6 @@ class CreatePostsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('posts');
+        Schema::dropIfExists('post');
     }
 }

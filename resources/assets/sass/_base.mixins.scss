@@ -55,3 +55,9 @@
   -moz-border-radius: $radius;
   border-radius: $radius;
 }
+
+@mixin border-radius-separate($topLeft, $topRight, $btmRight, $btmLeft) {
+  -webkit-border-radius: $topLeft $topRight $btmRight $btmLeft;
+  -moz-border-radius: $topLeft $topRight $btmRight $btmLeft;
+  border-radius: $topLeft $topRight $btmRight $btmLeft;
+}

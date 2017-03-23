@@ -11,12 +11,12 @@ class HomeController extends Controller
 {
     public function showHome()
     {
-        return view('pages.home');
+        return view('page.home');
     }
 
     public function showAboutUs()
     {
-        return view('pages.aboutUs');
+        return view('page.aboutUs');
     }
 
     public function showCountries($id = null)
@@ -32,7 +32,7 @@ class HomeController extends Controller
                 }
             }
 
-            return view('pages.countries', compact('countries', 'postCount'));
+            return view('page.countries', compact('countries', 'postCount'));
         } else {
             $country = Country::find($id);
             $allPosts = [];
@@ -43,7 +43,7 @@ class HomeController extends Controller
                 }
             }
 
-            return view('pages.country', compact('allPosts', 'country'));
+            return view('post.countryPosts', compact('allPosts', 'country'));
         }
     }
 }

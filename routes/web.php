@@ -66,8 +66,29 @@ Route::group(['prefix' => 'post'], function () {
             'uses' => 'PostController@generatePdfFromView',
             'as' => 'post.viewToPdf'
         ]);
+
+        Route::get('/getPostImages/{id}', [
+            'uses' => 'ImageController@getPostImages',
+            'as' => 'post.getPostImages'
+        ]);
+
+        Route::post('/postImageUpload', [
+            'uses' => 'ImageController@postImageUpload',
+            'as' => 'post.imageUpload',
+        ]);
+
+        Route::post('/postImageDelete', [
+            'uses' => 'ImageController@postImageDelete',
+            'as' => 'post.imageDelete'
+        ]);
     });
 });
+
+Route::resource('test', 'TestController');
+
+//Route::get('/a', ['as' => 'upload', 'uses' => 'ImageController@getUpload']);
+//Route::post('upload', ['as' => 'upload-post', 'uses' => 'ImageController@postUpload']);
+//Route::post('upload/delete', ['as' => 'upload-remove', 'uses' => 'ImageController@deleteUpload']);
 
 Route::group(['prefix' => 'comment'], function () {
 
@@ -113,13 +134,23 @@ Route::group(['prefix' => 'user'], function () {
     Route::group(['middleware' => 'auth'], function () {
 
         Route::post('/updateImg/{user}', [
-            'uses' => 'UserController@updateProfileImage',
+            'uses' => 'ImageController@profileImageUpload',
             'as' => 'user.updateImg'
         ]);
 
         Route::get('/viewProfile', [
             'uses' => 'UserController@viewProfile',
             'as' => 'user.viewProfile'
+        ]);
+
+        Route::get('/editProfile', [
+            'uses' => 'UserController@editProfile',
+            'as' => 'user.editProfile'
+        ]);
+
+        Route::put('/updateProfile', [
+            'uses' => 'UserController@updateProfile',
+            'as' => 'user.updateProfile'
         ]);
 
         Route::get('/logout', [
@@ -152,5 +183,27 @@ Route::group(['prefix' => 'password'], function () {
             'uses' => 'Auth\ResetPasswordController@reset',
             'as' => 'password.reset'
         ]);
+    });
+});
+
+Route::group(['prefix' => 'api'], function () {
+
+    Route::group(['prefix' => 'v1'], function () {
+
+        Route::group(['prefix' => 'post'], function () {
+
+            Route::post('/', 'ApiController@storePost'); // create
+            Route::get('/{id?}', 'ApiController@showPost'); // read
+            Route::put('/', 'ApiController@updatePost'); // update
+            Route::delete('/{id}', 'ApiController@destroyPost'); // delete
+        });
+
+        Route::group(['prefix' => 'user'], function () {
+
+            Route::post('/', 'ApiController@storeUser'); // create
+            Route::get('/{id?}', 'ApiController@showUser'); // read
+            Route::put('/', 'ApiController@updateUser'); // update
+            Route::delete('/{id}', 'ApiController@destroyUser'); // delete
+        });
     });
 });
