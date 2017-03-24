@@ -8,7 +8,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="#">DiscoveReal</a>
+        <a class="navbar-brand" href="{{ route('home') }}">DiscoveReal</a>
     </div>
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse navList" id="bs-sidebar-navbar-collapse-1">
@@ -19,7 +19,7 @@
                 </a>
             </li>
             <li>
-                <a href="{{ route('aboutUs') }}">About Us
+                <a href="{{ route('news') }}">DR News
                     <div class="sideIcon pull-right"><i class="fa fa-info-circle" aria-hidden="true"></i></div>
                 </a>
             </li>

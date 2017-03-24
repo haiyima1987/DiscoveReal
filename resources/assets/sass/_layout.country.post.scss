@@ -107,6 +107,7 @@
 
 // create edit form
 .formCreateEdit {
+  position: relative;
   .leftElem {
     padding: 0 10px 0 0;
   }
@@ -115,5 +116,25 @@
   }
   #spanDeleteMsg {
     @include position(relative, $top: 8px);
+    float: right;
   }
+}
+
+.btnPublish {
+  @include position(absolute, $right: 0, $bottom: 120px);
+}
+
+// set drop zone bottom margin to make room for publish button
+.dropzoneBox {
+  margin-bottom: 80px;
+  //@include position(absolute, $left: 0, $right: 0);
+}
+
+// set the drop zone's border dashed
+#drDropzoneEdit {
+  border: 2px dashed $brand-primary;
+}
+
+#drDropzoneCreate {
+  @extend #drDropzoneEdit;
 }

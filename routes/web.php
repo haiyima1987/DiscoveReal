@@ -24,7 +24,7 @@ Route::get('/countries/{id?}', [
 
 Route::get('/about', [
     'uses' => 'HomeController@showAboutUs',
-    'as' => 'aboutUs'
+    'as' => 'news'
 ]);
 
 Route::group(['prefix' => 'post'], function () {
