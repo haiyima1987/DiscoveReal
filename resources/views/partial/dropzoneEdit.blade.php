@@ -1,6 +1,5 @@
 {!! Form::open(['method' => 'post', 'action'=>'ImageController@postImageUpload', 'files'=>true,
                 'class' => 'dropzone', 'id'=>'drDropzoneEdit']) !!}
-
 {{ csrf_field() }}
 {!! Form::hidden('postId', $post->id, ['id' => 'dropzonePostId']) !!}
 

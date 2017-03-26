@@ -4946,7 +4946,7 @@ namespace Illuminate\Support\Facades {
         }
         
         /**
-         * Get the message selector instance.
+         * Get the messenger selector instance.
          *
          * @return \Illuminate\Translation\MessageSelector 
          * @static 
@@ -4957,7 +4957,7 @@ namespace Illuminate\Support\Facades {
         }
         
         /**
-         * Set the message selector instance.
+         * Set the messenger selector instance.
          *
          * @param \Illuminate\Translation\MessageSelector $selector
          * @return void 
@@ -5082,7 +5082,7 @@ namespace Illuminate\Support\Facades {
         /**
          * Adds a log record at the DEBUG level.
          *
-         * @param string $message The log message
+         * @param string $message The log messenger
          * @param array $context The log context
          * @return Boolean Whether the record has been processed
          * @static 
@@ -5095,7 +5095,7 @@ namespace Illuminate\Support\Facades {
         /**
          * Adds a log record at the INFO level.
          *
-         * @param string $message The log message
+         * @param string $message The log messenger
          * @param array $context The log context
          * @return Boolean Whether the record has been processed
          * @static 
@@ -5108,7 +5108,7 @@ namespace Illuminate\Support\Facades {
         /**
          * Adds a log record at the NOTICE level.
          *
-         * @param string $message The log message
+         * @param string $message The log messenger
          * @param array $context The log context
          * @return Boolean Whether the record has been processed
          * @static 
@@ -5121,7 +5121,7 @@ namespace Illuminate\Support\Facades {
         /**
          * Adds a log record at the WARNING level.
          *
-         * @param string $message The log message
+         * @param string $message The log messenger
          * @param array $context The log context
          * @return Boolean Whether the record has been processed
          * @static 
@@ -5134,7 +5134,7 @@ namespace Illuminate\Support\Facades {
         /**
          * Adds a log record at the ERROR level.
          *
-         * @param string $message The log message
+         * @param string $message The log messenger
          * @param array $context The log context
          * @return Boolean Whether the record has been processed
          * @static 
@@ -5147,7 +5147,7 @@ namespace Illuminate\Support\Facades {
         /**
          * Adds a log record at the CRITICAL level.
          *
-         * @param string $message The log message
+         * @param string $message The log messenger
          * @param array $context The log context
          * @return Boolean Whether the record has been processed
          * @static 
@@ -5160,7 +5160,7 @@ namespace Illuminate\Support\Facades {
         /**
          * Adds a log record at the ALERT level.
          *
-         * @param string $message The log message
+         * @param string $message The log messenger
          * @param array $context The log context
          * @return Boolean Whether the record has been processed
          * @static 
@@ -5173,7 +5173,7 @@ namespace Illuminate\Support\Facades {
         /**
          * Adds a log record at the EMERGENCY level.
          *
-         * @param string $message The log message
+         * @param string $message The log messenger
          * @param array $context The log context
          * @return Boolean Whether the record has been processed
          * @static 
@@ -5184,7 +5184,7 @@ namespace Illuminate\Support\Facades {
         }
         
         /**
-         * Log a message to the logs.
+         * Log a messenger to the logs.
          *
          * @param string $level
          * @param string $message
@@ -5380,7 +5380,7 @@ namespace Illuminate\Support\Facades {
         }
         
         /**
-         * Send a new message when only a raw text part.
+         * Send a new messenger when only a raw text part.
          *
          * @param string $text
          * @param mixed $callback
@@ -5393,7 +5393,7 @@ namespace Illuminate\Support\Facades {
         }
         
         /**
-         * Send a new message when only a plain part.
+         * Send a new messenger when only a plain part.
          *
          * @param string $view
          * @param array $data
@@ -5407,7 +5407,7 @@ namespace Illuminate\Support\Facades {
         }
         
         /**
-         * Send a new message using a view.
+         * Send a new messenger using a view.
          *
          * @param string|array $view
          * @param array $data
@@ -5421,7 +5421,7 @@ namespace Illuminate\Support\Facades {
         }
         
         /**
-         * Queue a new e-mail message for sending.
+         * Queue a new e-mail messenger for sending.
          *
          * @param string|array $view
          * @param array $data
@@ -5436,7 +5436,7 @@ namespace Illuminate\Support\Facades {
         }
         
         /**
-         * Queue a new e-mail message for sending on the given queue.
+         * Queue a new e-mail messenger for sending on the given queue.
          *
          * @param string $queue
          * @param string|array $view
@@ -5451,7 +5451,7 @@ namespace Illuminate\Support\Facades {
         }
         
         /**
-         * Queue a new e-mail message for sending on the given queue.
+         * Queue a new e-mail messenger for sending on the given queue.
          * 
          * This method didn't match rest of framework's "onQueue" phrasing. Added "onQueue".
          *
@@ -5468,7 +5468,7 @@ namespace Illuminate\Support\Facades {
         }
         
         /**
-         * Queue a new e-mail message for sending after (n) seconds.
+         * Queue a new e-mail messenger for sending after (n) seconds.
          *
          * @param int $delay
          * @param string|array $view
@@ -5484,7 +5484,7 @@ namespace Illuminate\Support\Facades {
         }
         
         /**
-         * Queue a new e-mail message for sending after (n) seconds on the given queue.
+         * Queue a new e-mail messenger for sending after (n) seconds on the given queue.
          *
          * @param string $queue
          * @param int $delay
@@ -10533,7 +10533,7 @@ namespace Illuminate\Support\Facades {
         }
         
         /**
-         * Register a custom implicit validator message replacer.
+         * Register a custom implicit validator messenger replacer.
          *
          * @param string $rule
          * @param \Closure|string $replacer

@@ -11,11 +11,11 @@ let modalController = (() => {
     let $year = $("#userYear");
     let $count = $("#userCount");
     let $route = $("#userRoute");
+    let $msg = $("#userMsg");
 
     $btnModal.on("show.bs.modal", _showModal);
 
     function _showModal(e) {
-        console.log("debug");
         $img.attr("src", $(e.relatedTarget).data('img'));
         $username.html("Username: " + $(e.relatedTarget).data('username'));
         $role.html("Role: " + $(e.relatedTarget).data('role'));
@@ -23,6 +23,7 @@ let modalController = (() => {
         $location.html("<i class=\"fa fa-map-marker\"></i> " + $(e.relatedTarget).data('location'));
         $year.html("Joined at: " + $(e.relatedTarget).data('year'));
         $count.html("Posts: " + $(e.relatedTarget).data('count'));
-        $route.attr("href", $(e.relatedTarget).data('route'))
+        $route.attr("href", $(e.relatedTarget).data('route'));
+        $msg.attr("href", $(e.relatedTarget).data('msg'));
     }
 })();

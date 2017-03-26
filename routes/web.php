@@ -24,7 +24,7 @@ Route::get('/countries/{id?}', [
 
 Route::get('/about', [
     'uses' => 'HomeController@showAboutUs',
-    'as' => 'aboutUs'
+    'as' => 'news'
 ]);
 
 Route::group(['prefix' => 'post'], function () {
@@ -36,7 +36,7 @@ Route::group(['prefix' => 'post'], function () {
 
     Route::group(['middleware' => 'auth'], function () {
 
-        Route::get('/showCreate', [
+        Route::post('/showCreate', [
             'uses' => 'PostController@createPost',
             'as' => 'post.create'
         ]);
@@ -85,10 +85,6 @@ Route::group(['prefix' => 'post'], function () {
 });
 
 Route::resource('test', 'TestController');
-
-//Route::get('/a', ['as' => 'upload', 'uses' => 'ImageController@getUpload']);
-//Route::post('upload', ['as' => 'upload-post', 'uses' => 'ImageController@postUpload']);
-//Route::post('upload/delete', ['as' => 'upload-remove', 'uses' => 'ImageController@deleteUpload']);
 
 Route::group(['prefix' => 'comment'], function () {
 
@@ -158,6 +154,34 @@ Route::group(['prefix' => 'user'], function () {
             'as' => 'user.logOutUser'
         ]);
     });
+});
+
+Route::group(['prefix' => 'messages'], function () {
+
+    Route::get('/', [
+        'as' => 'messages',
+        'uses' => 'MessagesController@index'
+    ]);
+
+    Route::get('create/{user}', [
+        'as' => 'messages.create',
+        'uses' => 'MessagesController@create'
+    ]);
+
+    Route::post('/', [
+        'as' => 'messages.store',
+        'uses' => 'MessagesController@store'
+    ]);
+
+    Route::get('{id}', [
+        'as' => 'messages.show',
+        'uses' => 'MessagesController@show'
+    ]);
+
+    Route::put('{id}', [
+        'as' => 'messages.update',
+        'uses' => 'MessagesController@update'
+    ]);
 });
 
 Route::group(['prefix' => 'password'], function () {

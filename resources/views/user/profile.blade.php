@@ -73,8 +73,18 @@
                             </table>
                         </div>
                         <div id="msg" class="tab-pane fade">
-                            <h3>Menu 1</h3>
-                            <p>Some content in menu 1.</p>
+                            <table class="table table-condensed">
+                                <thead>
+                                <tr>
+                                    <td class="tdHead">Conversations</td>
+                                    <td>Unread</td>
+                                    <td>Creator</td>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                @include('messenger.index')
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>

@@ -171,7 +171,7 @@
                 uploadedBytes: 'Uploaded bytes exceed file size'
             },
 
-            // Translation function, gets the message key to be translated
+            // Translation function, gets the messenger key to be translated
             // and an object with context specific data as arguments:
             i18n: function (message, context) {
                 message = this.messages[message] || message.toString();

@@ -40,9 +40,9 @@ class ApiController extends Controller
         ]);
 
         if ($post->save()) {
-            return response()->json(['success' => true, 'message' => 'Post saved successfully'], 200);
+            return response()->json(['success' => true, 'messenger' => 'Post saved successfully'], 200);
         } else {
-            return response()->json(['success' => false, 'message' => 'Failed saving post'], 200);
+            return response()->json(['success' => false, 'messenger' => 'Failed saving post'], 200);
         }
     }
 
@@ -63,9 +63,9 @@ class ApiController extends Controller
         ]);
 
         if ($user->save()) {
-            return response()->json(['success' => true, 'message' => 'Uer saved successfully'], 200);
+            return response()->json(['success' => true, 'messenger' => 'Uer saved successfully'], 200);
         } else {
-            return response()->json(['success' => false, 'message' => 'Failed saving user'], 200);
+            return response()->json(['success' => false, 'messenger' => 'Failed saving user'], 200);
         }
     }
 
@@ -88,9 +88,9 @@ class ApiController extends Controller
         ]);
 
         if ($result) {
-            return response()->json(['success' => true, 'message' => 'User updated successfully'], 200);
+            return response()->json(['success' => true, 'messenger' => 'User updated successfully'], 200);
         } else {
-            return response()->json(['success' => false, 'message' => 'Failed updating user'], 200);
+            return response()->json(['success' => false, 'messenger' => 'Failed updating user'], 200);
         }
     }
 
@@ -99,9 +99,9 @@ class ApiController extends Controller
         $result = User::destroy($id);
 
         if ($result) {
-            return response()->json(['success' => true, 'message' => 'User deleted successfully'], 200);
+            return response()->json(['success' => true, 'messenger' => 'User deleted successfully'], 200);
         } else {
-            return response()->json(['success' => false, 'message' => 'Failed deleting user'], 200);
+            return response()->json(['success' => false, 'messenger' => 'Failed deleting user'], 200);
         }
     }
 }

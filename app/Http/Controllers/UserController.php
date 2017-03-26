@@ -8,6 +8,7 @@ use App\Http\Requests\ProfileRequest;
 use App\Http\Requests\SignupRequest;
 use App\Post;
 use App\User;
+use Cmgmyr\Messenger\Models\Thread;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
@@ -82,7 +83,9 @@ class UserController extends Controller
     {
         $user = Auth::user();
         $posts = Post::where('published', 1)->with('user')->get();
-        return view('user.profile', compact('user', 'posts'));
+        $threads = $this->getThreads();
+//        dd($threads);
+        return view('user.profile', compact('user', 'posts', 'threads'));
     }
 
     public function editProfile()
@@ -110,5 +113,16 @@ class UserController extends Controller
         } else {
             return view('page.signup');
         }
+    }
+
+    public function getThreads()
+    {
+        // All threads, ignore deleted/archived participants
+        $threads = Thread::getAllLatest()->get();
+        // All threads that user is participating in
+        // $threads = Thread::forUser(Auth::id())->latest('updated_at')->get();
+        // All threads that user is participating in, with new messages
+        // $threads = Thread::forUserWithNewMessages(Auth::id())->latest('updated_at')->get();
+        return $threads;
     }
 }
