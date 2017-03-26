@@ -183,6 +183,7 @@ return [
         Intervention\Image\ImageServiceProvider::class, // intervention image manipulator
 //        Barryvdh\DomPDF\ServiceProvider::class, // pdf file generator
         Barryvdh\Snappy\ServiceProvider::class, // pdf file generator
+        Cmgmyr\Messenger\MessengerServiceProvider::class, // messenger
 
     ],
 

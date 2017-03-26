@@ -39,7 +39,7 @@ let pageNumRenewal = (() => {
 let dotControl = (() => {
     let $dots = $(".pageDot");
     let $carousel = $(".carousel");
-    let $slidingTime = 1000;
+    let $slidingTime = 2000;
 
     // add event handlers
     $dots.on("click", slideToSpecificPage);
@@ -80,7 +80,7 @@ let btnControl = (() => {
     let $sliding = true;
     let $width = '100%';
     let $toggleTime = 100;
-    let $slidingTime = 3000;
+    let $slidingTime = 2000;
 
     // add event handlers
     $start.add($pause).click(toggleVisibility);

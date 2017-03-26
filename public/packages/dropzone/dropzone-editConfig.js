@@ -65,15 +65,15 @@ Dropzone.options.drDropzoneEdit = {
     },
     error: function (file, response) {
         // if($.type(response) === "string")
-        //     let message = response; //dropzone sends it's own error messages in string
+        //     let messenger = response; //dropzone sends it's own error messages in string
         // else
-        //     let message = response.message;
+        //     let messenger = response.messenger;
         // file.previewElement.classList.add("dz-error");
         // _ref = file.previewElement.querySelectorAll("[data-dz-errormessage]");
         // _results = [];
         // for (_i = 0, _len = _ref.length; _i < _len; _i++) {
         //     node = _ref[_i];
-        //     _results.push(node.textContent = message);
+        //     _results.push(node.textContent = messenger);
         // }
         // return _results;
     },

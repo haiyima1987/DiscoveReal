@@ -19,7 +19,7 @@
                          src="{{ $user->photo ? url($user->photo) : url('img/avatar.png') }}"
                          alt="{{ $user->id }}">
                 </div>
-                {!! Form::open(['id' => 'imgForm', 'method'=>'post', 'action'=>['UserController@updateProfileImage', $user], 'files'=>true]) !!}
+                {!! Form::open(['id' => 'imgForm', 'method'=>'post', 'action'=>['ImageController@profileImageUpload', $user], 'files'=>true]) !!}
                 {{ csrf_field() }}
                 {!! Form::file('photo', ['id'=>'btnFileUpload']) !!}
                 {!! Form::submit('Update') !!}
