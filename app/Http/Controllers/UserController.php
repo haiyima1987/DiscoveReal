@@ -9,7 +9,6 @@ use App\Http\Requests\SignupRequest;
 use App\Post;
 use App\User;
 use Cmgmyr\Messenger\Models\Thread;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 
@@ -26,7 +25,7 @@ class UserController extends Controller
             'role_id' => 1,
             'username' => $request->username,
             'password' => bcrypt($request->password),
-            'photo' => $request->photo,
+            'photo' => null,
             'firstName' => $request->firstName,
             'lastName' => $request->lastName,
             'email' => $request->email,
@@ -56,12 +55,10 @@ class UserController extends Controller
         $request->merge([$login => $request->input('login')]);
 
         if (Auth::attempt($request->only($login, 'password'))) {
-            $user = Auth::User();
             return redirect()->route('user.viewProfile');
         } else {
             $error = [];
             $error['msg'] = 'Username, email, or password incorrect';
-//            $errors = new MessageBag(['password' => ['Email and/or password invalid.']]);
             return redirect()->back()->with(['login' => $request->login])->withErrors($error);
         }
     }
@@ -75,16 +72,19 @@ class UserController extends Controller
 
     public function viewAllPosts(User $user)
     {
-        $posts = Post::where('published', 1)->with('user')->get();
+        $posts = Post::where([
+            ['published', 1],
+            ['user_id', $user->id]
+        ])->with('user')->paginate(20);
+
         return view('user.userPosts', compact('user', 'posts'));
     }
 
     public function viewProfile()
     {
         $user = Auth::user();
-        $posts = Post::where('published', 1)->with('user')->get();
+        $posts = Post::where('published', 1)->with('user')->paginate(15);
         $threads = $this->getThreads();
-//        dd($threads);
         return view('user.profile', compact('user', 'posts', 'threads'));
     }
 
@@ -109,8 +109,12 @@ class UserController extends Controller
         ]);
 
         if ($result) {
-            return redirect()->route('user.viewProfile');
+            $notification = ['toasterMsg' => "Successfully Updated Profile: " . $user->username,
+                'alert-type' => 'success'];
+            return redirect()->route('user.viewProfile')->with($notification);
         } else {
+            $notification = ['toasterMsg' => "Failed to Update Profile: " . $user->username,
+                'alert-type' => 'error'];
             return view('page.signup');
         }
     }
@@ -118,11 +122,11 @@ class UserController extends Controller
     public function getThreads()
     {
         // All threads, ignore deleted/archived participants
-        $threads = Thread::getAllLatest()->get();
+//        $threads = Thread::getAllLatest()->get();
         // All threads that user is participating in
-        // $threads = Thread::forUser(Auth::id())->latest('updated_at')->get();
+        $threads = Thread::forUser(Auth::id())->latest('updated_at')->get();
         // All threads that user is participating in, with new messages
-        // $threads = Thread::forUserWithNewMessages(Auth::id())->latest('updated_at')->get();
+//         $threads = Thread::forUserWithNewMessages(Auth::id())->latest('updated_at')->get();
         return $threads;
     }
 }

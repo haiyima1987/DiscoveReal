@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Illuminate\Pagination\Paginator;
 use Illuminate\Database\Eloquent\Model;
 
 class Post extends Model
@@ -20,7 +21,8 @@ class Post extends Model
         return $this->belongsTo('App\User');
     }
 
-    public function photos(){
+    public function photos()
+    {
         return $this->hasMany('App\Photo');
     }
 }

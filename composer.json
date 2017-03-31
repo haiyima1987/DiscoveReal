@@ -9,7 +9,6 @@
   "type": "project",
   "require": {
     "php": ">=5.6.4",
-    "barryvdh/laravel-dompdf": "^0.8.0",
     "barryvdh/laravel-ide-helper": "^2.3",
     "barryvdh/laravel-snappy": "^0.3.3",
     "h4cc/wkhtmltopdf-amd64": "0.12.x",
@@ -18,7 +17,7 @@
     "laravel/tinker": "~1.0",
     "laravelcollective/html": "^5.3.0",
     "mews/purifier": "^2.0",
-    "cmgmyr/messenger": "~2.0"
+    "cmgmyr/messenger": "~2.0",
   },
   "require-dev": {
     "fzaninotto/faker": "~1.4",

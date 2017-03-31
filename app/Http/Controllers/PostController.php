@@ -6,19 +6,11 @@ use App\Category;
 use App\Country;
 use App\Http\Requests\PostRequest;
 use App\Location;
-use App\Photo;
 use App\Post;
-use App\User;
-//use Barryvdh\DomPDF\Facade as PDF;
 use Barryvdh\Snappy\Facades\SnappyPdf as PDF;
-use Carbon\Carbon;
 use Gate;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Session;
-use Illuminate\Support\Facades\Storage;
 use Mews\Purifier\Facades\Purifier;
-use Intervention\Image\ImageManagerStatic as Image;
 
 class PostController extends Controller
 {
@@ -29,7 +21,6 @@ class PostController extends Controller
         $categories = Category::all()->pluck('name', 'id');
         $countries = Country::all()->pluck('name', 'id');
 
-//        dd(Auth::user()->id);
         $userId = Auth::user()->id;
         $post = new Post([
             'user_id' => $userId,
@@ -40,7 +31,6 @@ class PostController extends Controller
             'category_id' => null
         ]);
         $post->save();
-//        dd($post);
         return view('post.create', compact('countries', 'categories', 'post'));
     }
 
@@ -48,7 +38,6 @@ class PostController extends Controller
     {
         $post = Post::find($request->postId);
         $this->authorize('update', $post);
-//        dd($post);
 
         $attraction = strtolower($request->attraction);
         $address = strtolower($request->address);
@@ -68,7 +57,9 @@ class PostController extends Controller
         ]);
 
         if ($updateRes) {
-            return redirect()->route('post.view', $post);
+            $notification = ['toasterMsg' => "Successfully Published Post: " . ucwords($post->title),
+                'alert-type' => 'success'];
+            return redirect()->route('post.view', $post)->with($notification);
         } else {
             $errors = ['post' => 'Error saving post'];
             return redirect()->back()->withErrors($errors);
@@ -80,7 +71,8 @@ class PostController extends Controller
         $comments = $post->comments;
         $photos = $post->photos;
         $user = Auth::user();
-        return view('post.view', compact('post', 'comments', 'photos', 'user'));
+
+        return view('post.viewPost', compact('post', 'comments', 'photos', 'user'));
     }
 
     public function editPost(Post $post)
@@ -92,7 +84,9 @@ class PostController extends Controller
         $category = Category::find($post->category_id);
         $location = Location::find($post->location_id);
         $country = Country::find($location->country_id);
-        return view('post.editPost', compact('post', 'location', 'categories', 'category', 'countries', 'country'));
+
+        return view('post.editPost',
+            compact('post', 'location', 'categories', 'category', 'countries', 'country'));
     }
 
     public function updatePost(PostRequest $request, Post $post)
@@ -112,30 +106,15 @@ class PostController extends Controller
             'category_id' => $request->category
         ]);
 
-//        if ($updateRes){
-//            Photo::where()
-//            $counter = 0;
-//
-//            foreach ($request->file('photos') as $photo) {
-//                $name = time() . $counter . '.' . $photo->getClientOriginalExtension();
-////                $photo = Image::make($photo)->insert('public/img/watermark.png');
-//                $imgPath = Storage::putFileAs('storage/img/posts', $photo, $name);
-//                $photo = new Photo([
-//                    'post_id' => $post->id,
-//                    'imgPath' => $imgPath
-//                ]);
-//
-//                $result = $photo->save();
-//                if (!$result) {
-//                    $errors = ['file' => 'Error saving file'];
-//                    return redirect()->back()->withErrors($errors);
-//                }
-//                $counter++;
-//            }
-//
-//        }
-
-        return redirect()->route('post.view', ['id' => $post->id]);
+        if ($updateRes) {
+            $notification = ['toasterMsg' => "Successfully Updated Post: " . ucwords($post->title),
+                'alert-type' => 'success'];
+            return redirect()->route('post.view', $post)->with($notification);
+        } else {
+            $notification = ['toasterMsg' => "Failed to Update Post: " . ucwords($post->title),
+                'alert-type' => 'error'];
+            return redirect()->back();
+        }
     }
 
     public function removePost(Post $post)
@@ -147,7 +126,9 @@ class PostController extends Controller
             Location::destroy($post->location_id);
         }
         $post->delete();
-        return redirect()->route('user.profile');
+        $notification = ['toasterMsg' => "Successfully Deleted Post: " . ucwords($post->title),
+            'alert-type' => 'success'];
+        return redirect()->route('user.viewProfile')->with($notification);
     }
 
     // helper function -- get location id if it exists, create one if not
@@ -177,11 +158,7 @@ class PostController extends Controller
     {
         $comments = $post->comments;
         $photos = $post->photos;
-//        $user = User::find($post->user_id);
-//        $id = Session::has('id') ? Session::get('id') : null;
-//        $user = User::find($id);
         $pdf = PDF::loadView('post.viewToPdf', compact('post', 'comments', 'photos'));
         return $pdf->download('download.pdf');
-//        return view('post.viewToPdf', compact('post', 'comments', 'photos'));
     }
 }

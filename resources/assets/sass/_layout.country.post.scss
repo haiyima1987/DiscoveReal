@@ -124,6 +124,10 @@
   @include position(absolute, $right: 0, $bottom: 120px);
 }
 
+.btnComment {
+  margin-bottom: 20px;
+}
+
 // set drop zone bottom margin to make room for publish button
 .dropzoneBox {
   margin-bottom: 80px;
@@ -137,4 +141,13 @@
 
 #drDropzoneCreate {
   @extend #drDropzoneEdit;
+}
+
+// set dropzone text center align and clickable
+.dropzone.dz-clickable * {
+  span {
+    cursor: pointer;
+    @include position(absolute, $top: 50%, $left: 50%);
+    @include translate(-50%, -50%);
+  }
 }

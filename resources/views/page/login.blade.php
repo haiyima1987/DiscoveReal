@@ -19,20 +19,28 @@
 
             <fieldset>
                 <legend>Login Information:</legend>
-                <div class="input-group input-group-lg {{ $errors->has('msg') ? 'has-error' : '' }}">
+                <div class="input-group input-group-lg {{ $errors->has('login') || $errors->has('msg') ? 'has-error' : '' }}">
                     <span class="input-group-addon"><i class="fa fa-user-circle-o fa-fw" aria-hidden="true"></i></span>
                     {!! Form::text('login', old('login'), ['class'=>'form-control', 'placeholder'=>'Enter Username/Email']) !!}
-                    @if ($errors->has('msg'))
-                        <span class="help-block"><strong>{{ $errors->first('msg') }}</strong></span>
-                    @endif
                 </div>
-                <div class="input-group input-group-lg {{ $errors->has('msg') ? 'has-error' : '' }}">
+                @if ($errors->has('login'))
+                    <p class="alert alert-danger text-center errorInfo"><strong>{{ $errors->first('login') }}</strong></p>
+                @endif
+                @if ($errors->has('msg'))
+                    <p class="alert alert-danger text-center errorInfo"><strong>{{ $errors->first('msg') }}</strong></p>
+                @endif
+
+                <div class="input-group input-group-lg {{ $errors->has('password') || $errors->has('msg') ? 'has-error' : '' }}">
                     <span class="input-group-addon"><i class="fa fa-lock fa-fw" aria-hidden="true"></i></span>
                     {!! Form::password('password', ['class'=>'form-control', 'placeholder'=>'Enter Password']) !!}
-                    @if ($errors->has('msg'))
-                        <span class="help-block"><strong>{{ $errors->first('msg') }}</strong></span>
-                    @endif
                 </div>
+                @if ($errors->has('password'))
+                    <p class="alert alert-danger text-center errorInfo"><strong>{{ $errors->first('password') }}</strong></p>
+                @endif
+                @if ($errors->has('msg'))
+                    <p class="alert alert-danger text-center errorInfo"><strong>{{ $errors->first('msg') }}</strong></p>
+                @endif
+
                 <br>
                 <div class="form-group">
                     <div class="col-sm-9 col-sm-offset-3">

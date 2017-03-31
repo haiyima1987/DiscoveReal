@@ -71,6 +71,7 @@
                                 @endforeach
                                 </tbody>
                             </table>
+                            <div class="text-center">{{ $posts->render() }}</div>
                         </div>
                         <div id="msg" class="tab-pane fade">
                             <table class="table table-condensed">

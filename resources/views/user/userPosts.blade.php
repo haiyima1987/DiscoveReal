@@ -12,6 +12,8 @@
 @section('content')
 
     <div class="content">
+        <div class="text-center">{!! $posts->render() !!}</div>
+
         <table class="table table-condensed">
             <thead>
             <tr>
@@ -26,7 +28,7 @@
                     <td class="col-sm-8 tdHead"><a href="{{ route('post.view', $post) }}">
                             {{ ucwords($post->title) }}
                         </a>
-                        <p>Published at {{ $post->created_at->format('d-M-Y, H:i A') }}
+                        <p>Published by {{ $post->user->username }} at {{ $post->created_at->format('d-M-Y, H:i A') }}
                         </p>
                     </td>
                     <td class="col-sm-2">
@@ -37,6 +39,8 @@
             @endforeach
             </tbody>
         </table>
+
+        <div class="text-center">{!! $posts->render() !!}</div>
     </div>
 
 @endsection

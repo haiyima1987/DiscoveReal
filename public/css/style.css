@@ -48,7 +48,7 @@ html, body {
     color: #f3920f; }
 
 .content {
-  padding: 20px; }
+  padding: 40px 20px; }
 
 .table-condensed .tdHead {
   padding-left: 20px; }
@@ -328,11 +328,29 @@ html, body {
   right: 0;
   bottom: 120px; }
 
+.btnComment {
+  margin-bottom: 20px; }
+
 .dropzoneBox {
   margin-bottom: 80px; }
 
 #drDropzoneEdit, #drDropzoneCreate {
   border: 2px dashed #3097D1; }
+
+.dropzone.dz-clickable * span {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -moz-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  -o-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%); }
+
+.errorInfo {
+  margin: 0 0 2px 0;
+  padding: 2px; }
 
 #imgForm {
   display: none; }

@@ -92,7 +92,7 @@ let btnControl = (() => {
     // toggle start and stop button visibility
     function toggleVisibility() {
         $sliding = !$sliding;
-        if ($sliding) {
+        if (!$sliding) {
             $pause.delay($toggleTime).show($toggleTime);
             $start.delay($toggleTime).hide();
         }

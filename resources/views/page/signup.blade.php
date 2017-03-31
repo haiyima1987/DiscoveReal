@@ -23,24 +23,29 @@
                 <div class="input-group input-group {{ $errors->has('username') ? 'has-error' : '' }}">
                     <span class="input-group-addon"><i class="fa fa-user-circle-o fa-fw" aria-hidden="true"></i></span>
                     {!! Form::text('username', old('username'), ['class'=>'form-control', 'placeholder'=>'Enter Username']) !!}
-                    @if ($errors->has('username'))
-                        <span class="help-block"><strong>{{ $errors->first('username') }}</strong></span>
-                    @endif
                 </div>
+                @if ($errors->has('username'))
+                    <p class="alert alert-danger text-center errorInfo">
+                        <strong>{{ $errors->first('username') }}</strong></p>
+                @endif
+
                 <div class="input-group input-group {{ $errors->has('password') ? 'has-error' : '' }}">
                     <span class="input-group-addon"><i class="fa fa-lock fa-fw" aria-hidden="true"></i></span>
                     {!! Form::password('password', ['class'=>'form-control', 'placeholder'=>'Enter Password']) !!}
-                    @if ($errors->has('password'))
-                        <span class="help-block"><strong>{{ $errors->first('password') }}</strong></span>
-                    @endif
                 </div>
+                @if ($errors->has('password'))
+                    <p class="alert alert-danger text-center errorInfo">
+                        <strong>{{ $errors->first('password') }}</strong></p>
+                @endif
+
                 <div class="input-group input-group {{ $errors->has('password_confirmation') ? 'has-error' : '' }}">
                     <span class="input-group-addon"><i class="fa fa-lock fa-fw" aria-hidden="true"></i></span>
                     {!! Form::password('password_confirmation', ['class'=>'form-control', 'placeholder'=>'Confirm Password']) !!}
-                    @if ($errors->has('password_confirmation'))
-                        <span class="help-block"><strong>{{ $errors->first('password_confirmation') }}</strong></span>
-                    @endif
                 </div>
+                @if ($errors->has('password_confirmation'))
+                    <p class="alert alert-danger text-center errorInfo">
+                        <strong>{{ $errors->first('password_confirmation') }}</strong></p>
+                @endif
             </fieldset>
             <br>
             <fieldset>
@@ -48,31 +53,39 @@
                 <div class="input-group input-group {{ $errors->has('firstName') ? 'has-error' : '' }}">
                     <span class="input-group-addon"><i class="fa fa-address-card fa-fw" aria-hidden="true"></i></span>
                     {!! Form::text('firstName', old('firstName'), ['class'=>'form-control', 'placeholder'=>'First Name']) !!}
-                    @if ($errors->has('firstName'))
-                        <span class="help-block"><strong>{{ $errors->first('firstName') }}</strong></span>
-                    @endif
                 </div>
+                @if ($errors->has('firstName'))
+                    <p class="alert alert-danger text-center errorInfo">
+                        <strong>{{ $errors->first('firstName') }}</strong></p>
+                @endif
+
                 <div class="input-group input-group {{ $errors->has('lastName') ? 'has-error' : '' }}">
                     <span class="input-group-addon"><i class="fa fa-address-card-o fa-fw" aria-hidden="true"></i></span>
                     {!! Form::text('lastName', old('lastName'), ['class'=>'form-control', 'placeholder'=>'Last Name']) !!}
-                    @if ($errors->has('lastName'))
-                        <span class="help-block"><strong>{{ $errors->first('lastName') }}</strong></span>
-                    @endif
                 </div>
+                @if ($errors->has('lastName'))
+                    <p class="alert alert-danger text-center errorInfo">
+                        <strong>{{ $errors->first('lastName') }}</strong></p>
+                @endif
+
                 <div class="input-group input-group {{ $errors->has('email') ? 'has-error' : '' }}">
                     <span class="input-group-addon"><i class="fa fa-envelope fa-fw" aria-hidden="true"></i></span>
                     {!! Form::email('email', old('email'), ['class'=>'form-control', 'placeholder'=>'Enter Email']) !!}
-                    @if ($errors->has('email'))
-                        <span class="help-block"><strong>{{ $errors->first('email') }}</strong></span>
-                    @endif
                 </div>
-                <div class="input-group input-group {{ $errors->has('bday') ? 'has-error' : '' }}">
+                @if ($errors->has('email'))
+                    <p class="alert alert-danger text-center errorInfo"><strong>{{ $errors->first('email') }}</strong>
+                    </p>
+                @endif
+
+                <div class="input-group input-group {{ $errors->has('birthday') ? 'has-error' : '' }}">
                     <span class="input-group-addon"><i class="fa fa-birthday-cake fa-fw" aria-hidden="true"></i></span>
-                    {!! Form::date('bday', old('bday'), ['class'=>'form-control', 'placeholder'=>'Enter Birthday']) !!}
-                    @if ($errors->has('bday'))
-                        <span class="help-block"><strong>{{ $errors->first('bday') }}</strong></span>
-                    @endif
+                    {!! Form::date('birthday', old('birthday'), ['class'=>'form-control', 'placeholder'=>'Enter Birthday']) !!}
                 </div>
+                @if ($errors->has('birthday'))
+                    <p class="alert alert-danger text-center errorInfo">
+                        <strong>{{ $errors->first('birthday') }}</strong></p>
+                @endif
+
                 <div class="input-group input-group">
                     <label class="input-group-addon">
                         <i class="fa fa-mars fa" aria-hidden="true"></i>&nbsp;&nbsp;
@@ -87,20 +100,25 @@
                         <input type="radio" name="gender" value="O">
                     </label>
                 </div>
+
                 <div class="input-group input-group {{ $errors->has('city') ? 'has-error' : '' }}">
                     <span class="input-group-addon"><i class="fa fa-map-marker fa-fw" aria-hidden="true"></i></span>
                     {!! Form::text('city', old('city'), ['class'=>'form-control', 'placeholder'=>'Enter City']) !!}
-                    @if ($errors->has('city'))
-                        <span class="help-block"><strong>{{ $errors->first('city') }}</strong></span>
-                    @endif
                 </div>
+                @if ($errors->has('city'))
+                    <p class="alert alert-danger text-center errorInfo"><strong>{{ $errors->first('city') }}</strong>
+                    </p>
+                @endif
+
                 <div class="input-group input-group {{ $errors->has('country') ? 'has-error' : '' }}">
                     <span class="input-group-addon"><i class="fa fa-globe fa-fw" aria-hidden="true"></i></span>
                     {!! Form::text('country', old('country'), ['class'=>'form-control', 'placeholder'=>'Enter Country']) !!}
-                    @if ($errors->has('country'))
-                        <span class="help-block"><strong>{{ $errors->first('country') }}</strong></span>
-                    @endif
                 </div>
+                @if ($errors->has('country'))
+                    <p class="alert alert-danger text-center errorInfo"><strong>{{ $errors->first('country') }}</strong>
+                    </p>
+                @endif
+
                 <br>
                 <div class="form-group">
                     {!! Form::submit('Sign Up', ['class'=>'btn btn-success btn center-block']) !!}
