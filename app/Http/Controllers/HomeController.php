@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Country;
-use App\Location;
-use App\Post;
-use Illuminate\Http\Request;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Pagination\Paginator;
 
 class HomeController extends Controller
 {
@@ -39,11 +39,23 @@ class HomeController extends Controller
 
             foreach ($country->locations as $location) {
                 foreach ($location->posts as $post) {
-                    array_push($allPosts, $post);
+                    $allPosts[] = $post;
                 }
             }
 
-            return view('post.countryPosts', compact('allPosts', 'country'));
+            $posts = $this->paginate(new Collection($allPosts));
+            return view('post.countryPosts', compact('posts', 'country'));
         }
+    }
+
+    public function paginate($items, $perPage = 20)
+    {
+        // get current page
+        $currentPage = LengthAwarePaginator::resolveCurrentPage();
+        // get items to display
+        $currentItems = $items->slice(($currentPage - 1) * $perPage, $perPage);
+        // create a paginator
+        return new LengthAwarePaginator($currentItems, count($items), $perPage,
+            $currentPage, ['path' => Paginator::resolveCurrentPath()]);
     }
 }

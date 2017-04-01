@@ -94,6 +94,21 @@ Route::group(['prefix' => 'comment'], function () {
             'uses' => 'CommentController@publishComment',
             'as' => 'comment.publish'
         ]);
+
+        Route::get('/edit/{comment}', [
+            'uses' => 'CommentController@editComment',
+            'as' => 'comment.edit'
+        ]);
+
+        Route::put('/update/{comment}', [
+            'uses' => 'CommentController@updateComment',
+            'as' => 'comment.update'
+        ]);
+
+        Route::delete('/remove/{comment}', [
+            'uses' => 'CommentController@removeComment',
+            'as' => 'comment.remove'
+        ]);
     });
 });
 
@@ -210,24 +225,19 @@ Route::group(['prefix' => 'password'], function () {
     });
 });
 
-Route::group(['prefix' => 'api'], function () {
+Route::group(['prefix' => 'admin'], function () {
 
-    Route::group(['prefix' => 'v1'], function () {
+    Route::get('/', ['uses' => 'AdminController@showAllUsers', 'as' => 'admin']);
+    Route::get('/delete/{id}', ['uses' => 'AdminController@destroy', 'as' => 'delete']);
 
-        Route::group(['prefix' => 'post'], function () {
+    Route::get('/delete/posts/{id}', ['uses' => 'AdminController@destroyP', 'as' => 'deleteP']);
+    Route::get('/delete/news/{id}', ['uses' => 'AdminController@destroyN', 'as' => 'deleteN']);
 
-            Route::post('/', 'ApiController@storePost'); // create
-            Route::get('/{id?}', 'ApiController@showPost'); // read
-            Route::put('/', 'ApiController@updatePost'); // update
-            Route::delete('/{id}', 'ApiController@destroyPost'); // delete
-        });
+    Route::get('/news', ['uses' => 'AdminController@showAllNews', 'as' => 'news']);
+    Route::get('/news/create', ['uses' => 'AdminController@crNews', 'as' => 'crNews']);
 
-        Route::group(['prefix' => 'user'], function () {
+    Route::get('/posts', ['uses' => 'AdminController@showAllPosts', 'as' => 'posts']);
+    Route::get('/posts/{id}', ['uses' => 'AdminController@showEditPosts', 'as' => 'postsEdit']);
 
-            Route::post('/', 'ApiController@storeUser'); // create
-            Route::get('/{id?}', 'ApiController@showUser'); // read
-            Route::put('/', 'ApiController@updateUser'); // update
-            Route::delete('/{id}', 'ApiController@destroyUser'); // delete
-        });
-    });
+    Route::get('/createPost', ['uses' => 'PostController@createPost', 'as' => 'crPost']);
 });

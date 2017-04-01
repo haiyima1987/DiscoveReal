@@ -24,7 +24,8 @@ class UsersTableSeeder extends Seeder
             'birthday' => Carbon::parse('1987-02-25'),
             'gender' => 'M',
             'city' => 'Eindhoven',
-            'country' => 'The Netherlands'
+            'country' => 'The Netherlands',
+            'api_token' => "Oyc7wbZNJMMl7qP28BgL8iWKqYdQE4m5EdJR0ZiN6Mx3FxwsmOrB84RpiLYh"
         ]);
         $user->save();
         $user = new User([
@@ -38,7 +39,8 @@ class UsersTableSeeder extends Seeder
             'birthday' => Carbon::parse('1985-05-19'),
             'gender' => 'M',
             'city' => 'New York',
-            'country' => 'USA'
+            'country' => 'USA',
+            'api_token' => "ilx6PjLhQzx0RR2pq3vHAPBoUSVHbH2sMRMFES4L4lKhvXnevAM1zMFlb8t3"
         ]);
         $user->save();
         $user = new User([
@@ -52,7 +54,8 @@ class UsersTableSeeder extends Seeder
             'birthday' => Carbon::parse('1989-11-02'),
             'gender' => 'F',
             'city' => 'Berlin',
-            'country' => 'Germany'
+            'country' => 'Germany',
+            'api_token' => "i7EvKVjTMHbHxL6fmPerZMIaTdtspIv0CkP7pgTZtpxJE7SwJxvVx1gXuik7"
         ]);
         $user->save();
         $user = new User([
@@ -66,7 +69,8 @@ class UsersTableSeeder extends Seeder
             'birthday' => Carbon::parse('1991-07-12'),
             'gender' => 'F',
             'city' => 'Beijing',
-            'country' => 'China'
+            'country' => 'China',
+            'api_token' => "zOorsjQggLiCcwtjvbNjGmxOvUFtpqR0GZ2Tm53HINqtxVmBMo9UeONrbiDV"
         ]);
         $user->save();
     }

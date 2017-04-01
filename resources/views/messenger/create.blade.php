@@ -19,7 +19,6 @@
             {!! Form::hidden('recipientId', $author->id) !!}
             {{--{!! Form::hidden('recipient', $author) !!}--}}
 
-
             <div class="form-group">
                 {!! Form::label('subject', 'Subject', ['class'=>'col-form-label']) !!}
                 {!! Form::text('subject', old('subject'), ['class'=>'form-control', 'placeholder'=>'Enter subject']) !!}

@@ -1,5 +1,3 @@
-
-
 <tr>
     <td class="col-sm-7 tdHead">
         <a href="{{ route('messages.show', $thread->id) }}">

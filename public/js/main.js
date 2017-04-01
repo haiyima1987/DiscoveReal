@@ -16,6 +16,7 @@ let modalController = (() => {
     $btnModal.on("show.bs.modal", _showModal);
 
     function _showModal(e) {
+        // console.log("debug");
         $img.attr("src", $(e.relatedTarget).data('img'));
         $username.html("Username: " + $(e.relatedTarget).data('username'));
         $role.html("Role: " + $(e.relatedTarget).data('role'));
@@ -24,6 +25,7 @@ let modalController = (() => {
         $year.html("Joined at: " + $(e.relatedTarget).data('year'));
         $count.html("Posts: " + $(e.relatedTarget).data('count'));
         $route.attr("href", $(e.relatedTarget).data('route'));
+        // console.log($(e.relatedTarget).data('route'));
         $msg.attr("href", $(e.relatedTarget).data('msg'));
     }
 })();

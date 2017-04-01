@@ -181,7 +181,6 @@ return [
         Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class, // Laravel IDE helper
         Mews\Purifier\PurifierServiceProvider::class, // HTML purifier
         Intervention\Image\ImageServiceProvider::class, // intervention image manipulator
-//        Barryvdh\DomPDF\ServiceProvider::class, // pdf file generator
         Barryvdh\Snappy\ServiceProvider::class, // pdf file generator
         Cmgmyr\Messenger\MessengerServiceProvider::class, // messenger
 
@@ -238,7 +237,6 @@ return [
         'Html' => Collective\Html\HtmlFacade::class,
         'Purifier' => Mews\Purifier\Facades\Purifier::class,
         'Image' => Intervention\Image\Facades\Image::class,
-//        'PDF' => Barryvdh\DomPDF\Facade::class,
         'PDF' => Barryvdh\Snappy\Facades\SnappyPdf::class,
         'SnappyImage' => Barryvdh\Snappy\Facades\SnappyImage::class,
 

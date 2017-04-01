@@ -18,6 +18,20 @@
             crossorigin="anonymous"></script>
     {!! Html::style('font-awesome/css/font-awesome.min.css') !!}
     {!! Html::style('css/style.css') !!}
+
+    {{--these styles are to solve the problem that css flex doesn't work with PDF printer--}}
+    <style>
+        .postBox {
+            position: relative;
+            min-height: 340px;
+        }
+        .postSide {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+        }
+    </style>
 </head>
 <body>
 
@@ -41,23 +55,27 @@
             <p>Date Joined: {{ $author->created_at->diffForHumans() }}</p>
             <p>Posts: {{ count($author->posts) }}</p>
         </div>
+
+        {{--spacer as layout helper to solve problem that flex doesn't work--}}
+        <div class="spacer col-xs-3"></div>
+
         <div class="postContent col-xs-9">
             <h4><strong>{{ ucwords($post->title) }}</strong></h4>
             <p>
                 <small>{{ $post->created_at->format('d-M-Y, H:i A') }}</small>
             </p>
             <hr>
-            {{--@foreach($photos->chunk(2) as $photoChunk)--}}
-                {{--<div class="row">--}}
-                    {{--@foreach($photoChunk as $photo)--}}
 
-                        {{--<div class="col-xs-6">--}}
-                            {{--<img src="{{ url($photo->imgPath) }}" alt="{{ $photo->post_id }}">--}}
-                        {{--</div>--}}
+            @foreach($photos->chunk(2) as $photoChunk)
+                <div class="row">
+                    @foreach($photoChunk as $photo)
+                        <div class="col-xs-6">
+                            <img src="{{ url($photo->imgPath) }}" alt="{{ $photo->post_id }}">
+                        </div>
+                    @endforeach
+                </div>
+            @endforeach
 
-                    {{--@endforeach--}}
-                {{--</div>--}}
-            {{--@endforeach--}}
             <p>{!! $post->content !!}</p>
         </div>
     </div>
@@ -75,6 +93,9 @@
                 <p>Date Joined: {{ $author->created_at->diffForHumans() }}</p>
                 <p>Posts: {{ count($author->posts) }}</p>
             </div>
+
+            <div class="spacer col-xs-3"></div>
+
             <div class="postContent col-xs-9">
                 <h4><strong>{{ $comment->title ? ucwords($comment->title) : '' }}</strong></h4>
                 <p>
