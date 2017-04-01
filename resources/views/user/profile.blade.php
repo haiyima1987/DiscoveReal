@@ -25,7 +25,7 @@
                 </div>
                 <hr>
                 <h5>{{ $user->username }}</h5>
-                <h5>{{ $user->role->role }}</h5>
+                <h5>{{ ucwords($user->role->role) }}</h5>
                 <p><i class="fa fa-id-card-o" aria-hidden="true"></i> {{ $user->firstName . ' ' . $user->lastName }}
                     <i class="fa {{ $user->gender == 'M' ? 'fa-male' : 'fa-female' }} fa-lg" aria-hidden="true"></i>
                 </p>
@@ -34,6 +34,9 @@
                 <p><i class="fa fa-map-marker"></i> {{ $user->city. ', '.$user->country }}</p>
 
                 <a class="btn btn-success btnProfileEdit" href="{{ route('user.editProfile') }}">Edit Profile</a>
+                @if($user->isAdmin())
+                    <a href="{{ route('admin.news') }}" class="btn btn-default btnProfileEdit">Go To Admin Page</a>
+                @endif
             </div>
 
             <div class="profileContent col-sm-9">
@@ -91,7 +94,6 @@
                 </div>
             </div>
         </div>
-
     </div>
 
 @endsection

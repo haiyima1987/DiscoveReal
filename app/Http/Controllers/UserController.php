@@ -22,7 +22,7 @@ class UserController extends Controller
     public function signUpUser(SignupRequest $request)
     {
         $user = new User([
-            'role_id' => 1,
+            'role_id' => 2,
             'username' => $request->username,
             'password' => bcrypt($request->password),
             'photo' => null,
@@ -32,13 +32,15 @@ class UserController extends Controller
             'birthday' => $request->birthday,
             'gender' => $request->gender,
             'city' => $request->city,
-            'country' => $request->country
+            'country' => $request->country,
+            'api_token' => str_random(60)
         ]);
 
         if ($user->save()) {
             Auth::login($user);
             Session::put('id', $user->id);
-            return view('user.profile', compact('user'));
+            $posts = Auth::user()->posts;
+            return view('user.profile', compact('user', 'posts'));
         } else {
             return view('page.signup');
         }
@@ -83,7 +85,10 @@ class UserController extends Controller
     public function viewProfile()
     {
         $user = Auth::user();
-        $posts = Post::where('published', 1)->with('user')->paginate(15);
+        $posts = Post::where([
+            ['published', 1],
+            ['user_id', Auth::id()]
+        ])->with('user')->paginate(15);
         $threads = $this->getThreads();
         return view('user.profile', compact('user', 'posts', 'threads'));
     }

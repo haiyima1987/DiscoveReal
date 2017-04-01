@@ -77,15 +77,15 @@
                     </div>
                 </div>
 
-                <div class="form-group {{ $errors->has('postContent') ? 'has-error' : '' }}">
-                    {!! Form::label('postContent', 'Post content', ['class'=>'col-form-label']) !!}
-                    {!! Form::textarea('postContent', $post->content, ['class'=>'form-control', 'placeholder'=>'Enter content']) !!}
-                    @if ($errors->has('postContent'))
-                        <span class="help-block"><strong>{{ $errors->first('postContent') }}</strong></span>
+                <div class="form-group {{ $errors->has('content') ? 'has-error' : '' }}">
+                    {!! Form::label('content', 'Post content', ['class'=>'col-form-label']) !!}
+                    {!! Form::textarea('content', $post->content, ['class'=>'form-control', 'placeholder'=>'Enter content']) !!}
+                    @if ($errors->has('content'))
+                        <span class="help-block"><strong>{{ $errors->first('content') }}</strong></span>
                     @endif
                 </div>
 
-                {!! Form::submit('Update', ['class'=>'btn btn-success pull-right btnPublish']) !!}
+                {!! Form::submit('Update', ['class'=>'btn btn-success pull-right btnUpdate']) !!}
                 {!! Form::close() !!}
 
                 <div class="dropzoneBox">

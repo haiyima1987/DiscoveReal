@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Country;
+use App\News;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Pagination\Paginator;
@@ -14,9 +15,10 @@ class HomeController extends Controller
         return view('page.home');
     }
 
-    public function showAboutUs()
+    public function showNews()
     {
-        return view('page.aboutUs');
+        $news = News::all();
+        return view('page.news', compact('news'));
     }
 
     public function showCountries($id = null)

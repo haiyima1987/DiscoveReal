@@ -22,8 +22,8 @@ Route::get('/countries/{id?}', [
     'as' => 'countries'
 ]);
 
-Route::get('/about', [
-    'uses' => 'HomeController@showAboutUs',
+Route::get('/news', [
+    'uses' => 'HomeController@showNews',
     'as' => 'news'
 ]);
 
@@ -36,7 +36,7 @@ Route::group(['prefix' => 'post'], function () {
 
     Route::group(['middleware' => 'auth'], function () {
 
-        Route::post('/showCreate', [
+        Route::get('/showCreate', [
             'uses' => 'PostController@createPost',
             'as' => 'post.create'
         ]);
@@ -45,7 +45,6 @@ Route::group(['prefix' => 'post'], function () {
             'uses' => 'PostController@publishPost',
             'as' => 'post.publish'
         ]);
-
 
         Route::get('/showEdit/{post}', [
             'uses' => 'PostController@editPost',
@@ -227,17 +226,75 @@ Route::group(['prefix' => 'password'], function () {
 
 Route::group(['prefix' => 'admin'], function () {
 
-    Route::get('/', ['uses' => 'AdminController@showAllUsers', 'as' => 'admin']);
-    Route::get('/delete/{id}', ['uses' => 'AdminController@destroy', 'as' => 'delete']);
+    Route::group(['middleware' => 'admin'], function () {
 
-    Route::get('/delete/posts/{id}', ['uses' => 'AdminController@destroyP', 'as' => 'deleteP']);
-    Route::get('/delete/news/{id}', ['uses' => 'AdminController@destroyN', 'as' => 'deleteN']);
+        Route::group(['prefix' => 'user'], function () {
 
-    Route::get('/news', ['uses' => 'AdminController@showAllNews', 'as' => 'news']);
-    Route::get('/news/create', ['uses' => 'AdminController@crNews', 'as' => 'crNews']);
+            Route::get('/', [
+                'uses' => 'AdminController@showAllUsers',
+                'as' => 'admin.users'
+            ]);
 
-    Route::get('/posts', ['uses' => 'AdminController@showAllPosts', 'as' => 'posts']);
-    Route::get('/posts/{id}', ['uses' => 'AdminController@showEditPosts', 'as' => 'postsEdit']);
+            Route::delete('/delete/{user}', [
+                'uses' => 'AdminController@destroyUser',
+                'as' => 'admin.deleteUser'
+            ]);
+        });
 
-    Route::get('/createPost', ['uses' => 'PostController@createPost', 'as' => 'crPost']);
+        Route::group(['prefix' => 'post'], function () {
+
+            Route::get('/posts', [
+                'uses' => 'AdminController@showAllPosts',
+                'as' => 'admin.posts'
+            ]);
+
+            Route::get('/viewPost/{post}', [
+                'uses' => 'AdminController@viewPost',
+                'as' => 'admin.viewPost'
+            ]);
+
+            Route::delete('deleteUnpublished', [
+                'uses' => 'AdminController@clearUnpublished',
+                'as' => 'admin.clearUnpublished'
+            ]);
+        });
+
+        Route::group(['prefix' => 'news'], function () {
+
+            Route::get('/', [
+                'uses' => 'AdminController@showAllNews',
+                'as' => 'admin.news'
+            ]);
+
+            Route::get('/create', [
+                'uses' => 'AdminController@createNews',
+                'as' => 'admin.createNews'
+            ]);
+
+            Route::post('/publish', [
+                'uses' => 'AdminController@publishNews',
+                'as' => 'admin.publishNews'
+            ]);
+
+            Route::get('/edit/{news}', [
+                'uses' => 'AdminController@editNews',
+                'as' => 'admin.editNews'
+            ]);
+
+            Route::put('/update/{news}', [
+                'uses' => 'AdminController@updateNews',
+                'as' => 'admin.updateNews'
+            ]);
+
+            Route::delete('/delete/{news}', [
+                'uses' => 'AdminController@destroyNews',
+                'as' => 'admin.deleteNews'
+            ]);
+
+            Route::delete('deleteUnpublished', [
+                'uses' => 'AdminController@clearUnpublishedNews',
+                'as' => 'admin.clearUnpublishedNews'
+            ]);
+        });
+    });
 });
