@@ -27,6 +27,7 @@
                                data-toggle="modal"
                                data-target="#userInfo"
                                data-img="{{ $user->photo ? url($user->photo) : url('img/avatar.png') }}"
+                               data-identity="{{ $user->id }}"
                                data-username="{{ $user->username }}"
                                data-role="{{ $user->role->role }}"
                                data-bday="{{ $user->birthday }}"
@@ -37,12 +38,15 @@
                                data-msg="{{ route('messages.create', $user) }}">
                                 {{ $user->username }}
                             </a>
+                            <p id="authenticatedId" hidden>{{ Auth::id() }}</p>
                         </td>
                         <td class="">{{ $user->created_at->format('d-M-Y, H:i A') }}</td>
                         <td><a href="#"
-                               class="btn btn-danger pull-right"
                                data-toggle="modal"
-                               data-target="#adminUserDelete">
+                               data-target="#adminUserDelete"
+                               data-username="{{ $user->username }}"
+                               data-identity="{{ $user->id }}"
+                               class="btn btn-danger pull-right">
                                 <i class="fa fa-trash-o" aria-hidden="true"></i> Delete
                             </a>
                         </td>
@@ -55,7 +59,7 @@
         <div class="text-center">{{ $users->render() }}</div>
     </div>
 
-    @include('admin.userModal')
-    @include('admin.deleteModal')
+    @include('admin.partials.userModal')
+    @include('admin.partials.deleteModal')
 
 @endsection

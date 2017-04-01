@@ -121,6 +121,10 @@
 }
 
 .btnPublish {
+  @include position(absolute, $right: 0, $bottom: 20px);
+}
+
+.btnUpdate {
   @include position(absolute, $right: 0, $bottom: 120px);
 }
 

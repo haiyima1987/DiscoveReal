@@ -36,7 +36,7 @@ Route::group(['prefix' => 'post'], function () {
 
     Route::group(['middleware' => 'auth'], function () {
 
-        Route::post('/showCreate', [
+        Route::get('/showCreate', [
             'uses' => 'PostController@createPost',
             'as' => 'post.create'
         ]);
@@ -45,7 +45,6 @@ Route::group(['prefix' => 'post'], function () {
             'uses' => 'PostController@publishPost',
             'as' => 'post.publish'
         ]);
-
 
         Route::get('/showEdit/{post}', [
             'uses' => 'PostController@editPost',
@@ -253,6 +252,11 @@ Route::group(['prefix' => 'admin'], function () {
                 'uses' => 'AdminController@viewPost',
                 'as' => 'admin.viewPost'
             ]);
+
+            Route::delete('deleteUnpublished', [
+                'uses' => 'AdminController@clearUnpublished',
+                'as' => 'admin.clearUnpublished'
+            ]);
         });
 
         Route::group(['prefix' => 'news'], function () {
@@ -285,6 +289,11 @@ Route::group(['prefix' => 'admin'], function () {
             Route::delete('/delete/{news}', [
                 'uses' => 'AdminController@destroyNews',
                 'as' => 'admin.deleteNews'
+            ]);
+
+            Route::delete('deleteUnpublished', [
+                'uses' => 'AdminController@clearUnpublishedNews',
+                'as' => 'admin.clearUnpublishedNews'
             ]);
         });
     });

@@ -234,6 +234,9 @@ html, body {
   .newsBox .newsContent {
     padding: 15px; }
 
+.newsDeleteBox {
+  margin-top: 100px; }
+
 .frame {
   padding: 0; }
   .frame a {
@@ -337,6 +340,11 @@ html, body {
 .btnPublish {
   position: absolute;
   right: 0;
+  bottom: 20px; }
+
+.btnUpdate {
+  position: absolute;
+  right: 0;
   bottom: 120px; }
 
 .btnComment {
@@ -369,6 +377,9 @@ html, body {
 .headBar {
   margin-bottom: 5px;
   padding: 0; }
+
+.headBarAdmin {
+  margin-bottom: 10px; }
 
 #profileImg {
   margin: 0 0 10px 0; }

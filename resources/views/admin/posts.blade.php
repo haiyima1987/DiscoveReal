@@ -3,6 +3,13 @@
 @section('content')
 
     <div class="content">
+        <div class="headBarNews col-sm-10 col-sm-offset-1">
+            {!! Form::open(['method'=>'delete', 'action'=>'AdminController@clearUnpublished']) !!}
+            {{ csrf_field() }}
+            {!! Form::submit('Clear Unpublished', ['class'=>'btn btn-warning pull-left']) !!}
+            {!! Form::close() !!}
+        </div>
+
         <div class="text-center">{{ $posts->render() }}</div>
 
         <div class="col-sm-10 col-sm-offset-1">
@@ -51,6 +58,6 @@
         <div class="text-center">{{ $posts->render() }}</div>
     </div>
 
-    @include('admin.userModal')
+    @include('admin.partials.userModal')
 
 @endsection

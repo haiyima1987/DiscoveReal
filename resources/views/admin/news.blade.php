@@ -3,6 +3,14 @@
 @section('content')
 
     <div class="content">
+        <div class="headBarAdmin col-sm-10 col-sm-offset-1">
+            <a class="btn btn-primary pull-right" href="{{ route('admin.createNews') }}">Create News</a>
+            {!! Form::open(['method'=>'delete', 'action'=>'AdminController@clearUnpublishedNews']) !!}
+            {{ csrf_field() }}
+            {!! Form::submit('Clear Unpublished', ['class'=>'btn btn-warning pull-left']) !!}
+            {!! Form::close() !!}
+        </div>
+
         <div class="text-center">{{ $news->render() }}</div>
 
         <div class="col-sm-10 col-sm-offset-1">
@@ -18,9 +26,10 @@
                     <tr>
                         <td class="tdHead">{{ $singleNews->title }}</td>
                         <td>{{ $singleNews->created_at->format('d-M-Y, H:i A') }}</td>
-                        <td><a href="{{ route('admin.deleteNews', $singleNews) }}"
-                               class="btn btn-danger pull-right">
-                                <i class="fa fa-trash-o" aria-hidden="true"></i> Delete
+                        <td>
+                            <a href="{{ route('admin.editNews', $singleNews) }}"
+                               class="btn btn-warning pull-right">
+                                <i class="fa fa-pencil" aria-hidden="true"></i> Edit
                             </a>
                         </td>
                     </tr>

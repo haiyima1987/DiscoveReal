@@ -31,7 +31,7 @@ class PostController extends Controller
             'category_id' => null
         ]);
         $post->save();
-        return view('post.create', compact('countries', 'categories', 'post'));
+        return view('post.createPost', compact('countries', 'categories', 'post'));
     }
 
     public function publishPost(PostRequest $request)
@@ -49,7 +49,7 @@ class PostController extends Controller
         $updateRes = $post->update([
             'user_id' => $userId,
             'title' => strtolower($request->title),
-            'content' => Purifier::clean($request->postContent),
+            'content' => Purifier::clean($request->input('content')),
             'rate' => null,
             'location_id' => $locationId,
             'category_id' => $request->category,
@@ -101,7 +101,7 @@ class PostController extends Controller
 
         $updateRes = $post->update([
             'title' => strtolower($request->title),
-            'content' => clean($request->postContent),
+            'content' => clean($request->input('content')),
             'location_id' => $locationId,
             'category_id' => $request->category
         ]);

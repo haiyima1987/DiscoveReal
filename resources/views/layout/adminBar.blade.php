@@ -28,6 +28,11 @@
                     <div class="sideIcon pull-right"><i class="fa fa-globe" aria-hidden="true"></i></div>
                 </a>
             </li>
+            <li>
+                <a href="{{ route('user.viewProfile') }}">My Profile
+                    <div class="sideIcon pull-right"><i class="fa fa-user" aria-hidden="true"></i></div>
+                </a>
+            </li>
         </ul>
     </div>
 </nav>

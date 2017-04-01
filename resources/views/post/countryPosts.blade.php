@@ -35,6 +35,7 @@
                                data-toggle="modal"
                                data-target="#userInfo"
                                data-img="{{ ($user = $post->user)->photo ? url($user->photo) : url('img/avatar.png') }}"
+                               data-identity="{{ $user->id }}"
                                data-username="{{ $user->username }}"
                                data-role="{{ $user->role->role }}"
                                data-bday="{{ $user->birthday }}"
