@@ -26,6 +26,7 @@ class CreateUsersTable extends Migration
             $table->char('gender');
             $table->string('city');
             $table->string('country');
+            $table->string('api_token', 60)->unique();
             $table->rememberToken();
             $table->timestamps();
         });
