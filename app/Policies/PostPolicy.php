@@ -20,7 +20,7 @@ class PostPolicy
      */
     public function view(User $user, Post $post)
     {
-        return $user->id === $post->user_id;
+        return $user->id === $post->user_id || $user->isAdmin();
     }
 
     /**
@@ -43,7 +43,7 @@ class PostPolicy
      */
     public function update(User $user, Post $post)
     {
-        return $user->id === $post->user_id;
+        return $user->id === $post->user_id || $user->isAdmin();
     }
 
     /**
@@ -55,6 +55,6 @@ class PostPolicy
      */
     public function delete(User $user, Post $post)
     {
-        return $user->id === $post->user_id;
+        return $user->id === $post->user_id || $user->isAdmin();
     }
 }

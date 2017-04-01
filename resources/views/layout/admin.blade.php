@@ -26,7 +26,7 @@
 
 <div class="bg container-fluid row">
     <div class="col-sm-3 col-md-2 leftCol">
-        @include('layout.sidebar')
+        @include('layout.adminBar')
     </div>
     <div class="col-sm-3 col-md-2 spacer">
     </div>

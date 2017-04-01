@@ -13,7 +13,6 @@ class ApiController extends Controller
     // api functions about users
     public function showUser($id = null)
     {
-        dd(Auth::guard('api'));
         if ($id) {
             $user = User::find($id);
             return $user->toJson();

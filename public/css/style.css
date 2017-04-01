@@ -223,6 +223,17 @@ html, body {
   .navbar-default .navbar-nav > li > a:focus {
     color: #383431; }
 
+.newsBox {
+  border: 1px solid #78797a;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  margin-bottom: 10px; }
+  .newsBox .newsSide {
+    padding: 0 5px; }
+  .newsBox .newsContent {
+    padding: 15px; }
+
 .frame {
   padding: 0; }
   .frame a {

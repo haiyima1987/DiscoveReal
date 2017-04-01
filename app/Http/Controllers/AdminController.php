@@ -6,95 +6,81 @@ use Illuminate\Http\Request;
 use App\User;
 use App\Post;
 use App\News;
+use Illuminate\Support\Facades\Auth;
 
 class AdminController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    // functions about users
     public function showAllUsers()
     {
-        //
-        return view('admin.users')
-            ->with('peoples', User::get());
+        $users = User::paginate(30);
+        return view('admin.users')->with('users', $users);
     }
+
+    public function destroyUser(User $user)
+    {
+        $user->delete();
+        return redirect()->route('admin.users');
+    }
+
+    // functions about posts
     public function showAllPosts()
     {
-        //
-        return view('admin.posts')
-            ->with('posts', Post::get());
-    }
-    public function showEditPosts($id)
-    {
-        //
-        return view('admin.posts')
-            ->with('posts', Post::where('user_id',$id)->get());
+        $posts = Post::paginate(30);
+        return view('admin.posts')->with('posts', $posts);
     }
 
+    public function viewPost(Post $post)
+    {
+        return redirect()->route('post.view', $post);
+    }
+
+    // functions about news
     public function showAllNews()
     {
-        return view('admin.news')->with('newss', News::get());
+        $news = News::paginate(30);
+        return view('admin.news')->with('news', $news);
     }
-public function crNews(){
-        return view("admin.crNews");
-}
-
 
     public function createNews()
     {
-        $this->authorize('create', News::class);
-
         $news = new News([
-            'user' => null,
+            'user_id' => null,
             'title' => null,
             'content' => null,
+            'published' => 0,
             'imgPath' => null
         ]);
         $news->save();
-//        dd($news);
-        return view('admin.create', compact('news'));
+        return view('admin.news.create', compact('news'));
     }
 
-
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
+    public function publishNews(Request $request)
     {
-        //
+        $news = new News([
+            'user_id' => Auth::id(),
+            'title' => $request->title,
+            'content' => $request->input('content'),
+            'published' => 1,
+            'imgPath' => null
+        ]);
+        $news->save();
+        return redirect()->route('admin.news');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
+    public function editNews(News $news)
     {
-        //
-        $u = User::find($id);
-        $u->delete();
-        return redirect('/admin');
+
     }
-    public function destroyP($id)
+
+    public function updateNews()
     {
-        //
-        $u = Post::find($id);
-        $u->delete();
-        return redirect('/admin/posts');
+
     }
-    public function destroyN($id)
+
+    public function destroyNews(News $news)
     {
-        //
-        $u = News::find($id);
-        $u->delete();
-        return redirect('/admin/news');
+        $news->delete();
+        return redirect()->route('admin.news');
     }
 }

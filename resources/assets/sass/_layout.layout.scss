@@ -1,15 +1,10 @@
 .bg {
-  //background-image: url("/img/bg0.jpg");
-  //background-repeat: repeat;
-  //background-size: cover;
-  //background-color: #333;
   @include position(absolute, $top: 0, $right: 0, $bottom: 0, $left: 0);
   display: flex;
 }
 
 .leftCol {
   padding: 0;
-  //@include position(absolute, $top: 0, $right: 0, $bottom: 0, $left: 0);
   height: 100%;
   background: $secondDarkGrey;
   position: fixed;
@@ -27,7 +22,6 @@
   position: relative;
   @include box-shadow(5px, 5px, 10px, $lightGrey);
   z-index: 60;
-  //@include position(absolute, $top: 0, $right: 0, $left: 0);
   img {
     width: 100%;
     height: 100%;
@@ -41,9 +35,6 @@
 // content container of each separate page
 .content {
   padding: 40px 20px;
-  //background: url('../img/bgGreyTexture.jpg') repeat;
-  //background-size: 50%;
-  //height: 100%;
 }
 
 // move first element of a td to the right a little bit
