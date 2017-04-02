@@ -25,7 +25,7 @@ class CommentController extends Controller
         if ($comment->save()) {
             $notification = ['toasterMsg' => "Successfully Published Comment: " . ucwords($comment->title),
                 'alert-type' => 'success'];
-            return redirect()->route('post.viewPost', $post)->with($notification);
+            return redirect()->route('post.view', $post)->with($notification);
         } else {
             $notification = ['toasterMsg' => "Failed to Publish Comment: " . ucwords($comment->title),
                 'alert-type' => 'error'];
