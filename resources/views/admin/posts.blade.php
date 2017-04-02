@@ -24,26 +24,29 @@
                 <tbody>
                 @foreach($posts as $post)
                     <tr>
-                        <td class="col-sm-8 tdHead"><a href="{{ route('admin.viewPost', $post) }}">
-                                {{ ucwords($post->title) }}
-                            </a>
-                            <p>Published by
-                                <a href="#"
-                                   data-toggle="modal"
-                                   data-target="#userInfo"
-                                   data-img="{{ ($user = $post->user)->photo ? url($user->photo) : url('img/avatar.png') }}"
-                                   data-username="{{ $user->username }}"
-                                   data-role="{{ $user->role->role }}"
-                                   data-bday="{{ $user->birthday }}"
-                                   data-location="{{ $user->city. ', '.$user->country }}"
-                                   data-year="{{ $user->created_at->format('d-M-Y') }}"
-                                   data-count="{{ count($user->posts) }}"
-                                   data-route="{{ route('user.allPosts', $user) }}"
-                                   data-msg="{{ route('messages.create', $user) }}">
-                                    {{ $post->user->username }}
-                                </a>
-                                at {{ $post->created_at->format('d-M-Y, H:i A') }}
-                            </p>
+                        <td class="col-sm-8 tdHead">
+                            @if($post->published == 1)
+                                <a href="{{ route('admin.viewPost', $post) }}">{{ ucwords($post->title) }}</a>
+                                <p>Published by
+                                    <a href="#"
+                                       data-toggle="modal"
+                                       data-target="#userInfo"
+                                       data-img="{{ ($user = $post->user)->photo ? url($user->photo) : url('img/avatar.png') }}"
+                                       data-username="{{ $user->username }}"
+                                       data-role="{{ $user->role->role }}"
+                                       data-bday="{{ $user->birthday }}"
+                                       data-location="{{ $user->city. ', '.$user->country }}"
+                                       data-year="{{ $user->created_at->format('d-M-Y') }}"
+                                       data-count="{{ count($user->posts) }}"
+                                       data-route="{{ route('user.allPosts', $user) }}"
+                                       data-msg="{{ route('messages.create', $user) }}">
+                                        {{ $post->user->username }}
+                                    </a>
+                                    at {{ $post->created_at->format('d-M-Y, H:i A') }}
+                                </p>
+                            @else
+                                <p>Junk Post at {{ $post->created_at->format('d-M-Y, H:i A') }}</p>
+                            @endif
                         </td>
                         <td class="col-sm-2">
                             <i class="fa fa-comments" aria-hidden="true"></i> {{ count($post->comments) }}
