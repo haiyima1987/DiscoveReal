@@ -36,12 +36,10 @@
                    id="userRoute"
                    class="btn btn-primary pull-right">View Posts
                 </a>
-                @if(Auth::id() != $post->user_id)
-                    <a href="#"
-                       id="userMsg"
-                       class="btn btn-success pull-right">Message Author
-                    </a>
-                @endif
+                <a href="#"
+                   id="userMsg"
+                   class="btn btn-success pull-right">Message Author
+                </a>
             </div>
         </div>
     </div>

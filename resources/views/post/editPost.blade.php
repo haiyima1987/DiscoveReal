@@ -31,7 +31,7 @@
         <div class="content">
             <div class="formCreateEdit clearfix">
 
-                {!! Form::open(['method'=>'put', 'action'=>['PostController@updatePost', $post], 'files'=>true]) !!}
+                {!! Form::open(['method'=>'put', 'action'=>['PostController@updatePost', $post]]) !!}
                 {{ csrf_field() }}
 
                 <div class="row">

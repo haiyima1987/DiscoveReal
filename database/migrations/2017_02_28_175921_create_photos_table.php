@@ -17,6 +17,7 @@ class CreatePhotosTable extends Migration
             $table->increments('id');
             $table->integer('post_id');
             $table->string('imgPath');
+            $table->string('thumbnailPath');
             $table->timestamps();
         });
     }

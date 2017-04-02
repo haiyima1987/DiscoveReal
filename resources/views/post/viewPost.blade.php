@@ -33,11 +33,12 @@
                          src="{{ ($author = $post->user)->photo ? url($author->photo) : url('img/avatar.png') }}"
                          alt="{{ $author->id }}">
                     <hr>
-                    <h4><a href="#"
+                    <h4>
+                        <a href="#"
                            data-toggle="modal"
                            data-target="#userInfo"
                            data-img="{{ $author->photo ? url($author->photo) : url('img/avatar.png') }}"
-                           data-identity="{{ $user->id }}"
+                           data-identity="{{ $author->id }}"
                            data-username="{{ $author->username }}"
                            data-role="{{ $author->role->role }}"
                            data-bday="{{ $author->birthday }}"
@@ -46,7 +47,9 @@
                            data-count="{{ count($author->posts) }}"
                            data-route="{{ route('user.allPosts', $author) }}">
                             {{ $post->user->username }}
-                        </a></h4>
+                        </a>
+                    </h4>
+                    <p id="authenticatedId" hidden>{{ Auth::id() }}</p>
                     <p>{{ ucwords($author->role->role) }}</p>
                     <p>{{ $author->city . ', '. $author->country }}</p>
                     <p>Date Joined: {{ $author->created_at->diffForHumans() }}</p>
@@ -61,17 +64,24 @@
 
                     <div class="postImgBox">
                         @foreach($photos->chunk(2) as $photoChunk)
+                            <p hidden>{{ $baseIndex = $loop->index }}</p>
                             <div class="row">
+
                                 @foreach($photoChunk as $photo)
 
                                     <div class="col-sm-6">
-                                        <img class="img-rounded" src="{{ url($photo->imgPath) }}"
-                                             alt="{{ $photo->post_id }}">
+                                        <div class="imgItemBox">
+                                            <img src="{{ url($photo->thumbnailPath) }}"
+                                                 alt="{{ $baseIndex * 2 + $loop->index }}"
+                                                 fullPath="{{ url($photo->imgPath) }}">
+                                            <div class="overlay"></div>
+                                        </div>
                                     </div>
 
                                 @endforeach
                             </div>
                         @endforeach
+                        <p id="photoCount" hidden>{{ count($photos) }}</p>
                     </div>
 
                     <p>{!! $post->content !!}</p>
@@ -90,12 +100,17 @@
             @each('post.partials.comments', $comments, 'comment')
 
             @if(Auth::check())
-                @include('post.partials.commentBox', ['user' => $user, 'post' => $post])
+                @include('post.partials.commentBox', ['user' => $author, 'post' => $post])
             @endif
 
         </div>
     </div>
 
     @include('post.partials.userInfoModal')
+    @include('post.partials.gallery')
 
+@endsection
+
+@section('scripts')
+    {!! Html::script('js/gallery.js') !!}
 @endsection

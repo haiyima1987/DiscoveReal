@@ -24,7 +24,13 @@
                 <tbody>
                 @foreach($news as $singleNews)
                     <tr>
-                        <td class="tdHead">{{ $singleNews->title }}</td>
+                        <td class="tdHead">
+                            @if($singleNews->published == 1)
+                                {{ $singleNews->title }}
+                            @else
+                                <p>Junk News</p>
+                            @endif
+                        </td>
                         <td>{{ $singleNews->created_at->format('d-M-Y, H:i A') }}</td>
                         <td>
                             <a href="{{ route('admin.editNews', $singleNews) }}"

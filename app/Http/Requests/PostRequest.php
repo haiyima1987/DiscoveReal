@@ -31,7 +31,7 @@ class PostRequest extends FormRequest
             'country' => 'required',
             'category' => 'required',
             'photo' => 'image|max:512|mimes:jpeg,jpg,bmp,png',
-            'postContent' => 'required|min:24'
+            'content' => 'required|min:24'
         ];
     }
 

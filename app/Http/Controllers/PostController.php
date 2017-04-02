@@ -70,9 +70,8 @@ class PostController extends Controller
     {
         $comments = $post->comments;
         $photos = $post->photos;
-        $user = Auth::user();
 
-        return view('post.viewPost', compact('post', 'comments', 'photos', 'user'));
+        return view('post.viewPost', compact('post', 'comments', 'photos'));
     }
 
     public function editPost(Post $post)
@@ -113,7 +112,7 @@ class PostController extends Controller
         } else {
             $notification = ['toasterMsg' => "Failed to Update Post: " . ucwords($post->title),
                 'alert-type' => 'error'];
-            return redirect()->back();
+            return redirect()->back()->with($notification);
         }
     }
 

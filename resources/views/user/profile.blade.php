@@ -35,7 +35,9 @@
 
                 <a class="btn btn-success btnProfileEdit" href="{{ route('user.editProfile') }}">Edit Profile</a>
                 @if($user->isAdmin())
-                    <a href="{{ route('admin.news') }}" class="btn btn-default btnProfileEdit">Go To Admin Page</a>
+                    <div class="col-sm-12">
+                        <a href="{{ route('admin.news') }}" class="btn btn-default btnProfileEdit">Go To Admin Page</a>
+                    </div>
                 @endif
             </div>
 
