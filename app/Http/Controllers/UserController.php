@@ -39,8 +39,7 @@ class UserController extends Controller
         if ($user->save()) {
             Auth::login($user);
             Session::put('id', $user->id);
-            $posts = Auth::user()->posts;
-            return view('user.profile', compact('user', 'posts'));
+            return redirect()->route('user.viewProfile');
         } else {
             return view('page.signup');
         }

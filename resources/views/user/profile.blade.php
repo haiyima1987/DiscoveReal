@@ -50,47 +50,55 @@
 
                     <div class="tab-content">
                         <div id="post" class="tab-pane fade in active">
-                            <table class="table table-condensed">
-                                <thead>
-                                <tr>
-                                    <td class="tdHead">Topics</td>
-                                    <td>Statistics</td>
-                                    <td>Date Updated</td>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                @foreach($posts as $post)
+                            @if(count($posts) > 0)
+                                <table class="table table-condensed">
+                                    <thead>
                                     <tr>
-                                        <td class="col-sm-8 tdHead"><a href="{{ route('post.view', $post) }}">
-                                                {{ ucwords($post->title) }}
-                                            </a>
-                                            <p>Published at {{ $post->created_at->format('d-M-Y, H:i A') }}
-                                            </p>
-                                        </td>
-                                        <td class="col-sm-2">
-                                            <i class="fa fa-comments"
-                                               aria-hidden="true"></i> {{ count($post->comments) }}
-                                        </td>
-                                        <td class="col-sm-2">{{ $post->updated_at->diffForHumans() }}</td>
+                                        <td class="tdHead">Topics</td>
+                                        <td>Statistics</td>
+                                        <td>Date Updated</td>
                                     </tr>
-                                @endforeach
-                                </tbody>
-                            </table>
-                            <div class="text-center">{{ $posts->render() }}</div>
+                                    </thead>
+                                    <tbody>
+                                    @foreach($posts as $post)
+                                        <tr>
+                                            <td class="col-sm-8 tdHead"><a href="{{ route('post.view', $post) }}">
+                                                    {{ ucwords($post->title) }}
+                                                </a>
+                                                <p>Published at {{ $post->created_at->format('d-M-Y, H:i A') }}
+                                                </p>
+                                            </td>
+                                            <td class="col-sm-2">
+                                                <i class="fa fa-comments"
+                                                   aria-hidden="true"></i> {{ count($post->comments) }}
+                                            </td>
+                                            <td class="col-sm-2">{{ $post->updated_at->diffForHumans() }}</td>
+                                        </tr>
+                                    @endforeach
+                                    </tbody>
+                                </table>
+                                <div class="text-center">{{ $posts->render() }}</div>
+                            @else
+                                <p class="alert alert-info text-center">You do not have any post yet</p>
+                            @endif
                         </div>
                         <div id="msg" class="tab-pane fade">
-                            <table class="table table-condensed">
-                                <thead>
-                                <tr>
-                                    <td class="tdHead">Conversations</td>
-                                    <td>Unread</td>
-                                    <td>Creator</td>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                @include('messenger.index')
-                                </tbody>
-                            </table>
+                            @if(count($threads) > 0)
+                                <table class="table table-condensed">
+                                    <thead>
+                                    <tr>
+                                        <td class="tdHead">Conversations</td>
+                                        <td>Unread</td>
+                                        <td>Creator</td>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    @include('messenger.index')
+                                    </tbody>
+                                </table>
+                            @else
+                                <p class="alert alert-info text-center">You do not have any conversation yet</p>
+                            @endif
                         </div>
                     </div>
                 </div>
