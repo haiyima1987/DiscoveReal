@@ -122,7 +122,7 @@ class MessagesController extends Controller
             [
                 'thread_id' => $thread->id,
                 'user_id' => Auth::id(),
-                'body' => Input::get('messenger'),
+                'body' => Input::get('message'),
             ]
         );
         // Add replier as a participant
