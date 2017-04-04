@@ -10,7 +10,7 @@
 @endsection
 
 @section('content')
-    <div class="content">
+    <div class="content clearfix">
         <div class="col-sm-8 col-sm-offset-2">
             <h4>{{ $thread->subject }}</h4>
             @each('messenger.partials.messages', $thread->messages, 'message')
