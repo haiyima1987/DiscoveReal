@@ -22,7 +22,9 @@ Dropzone.options.drDropzoneEdit = {
         // Add server images
         let myDropzone = this;
         let $postId = $("#dropzonePostId").val();
-        let $url = '/post/getPostImages/' + $postId;
+        // change the url to your url
+        // let $url = '/post/getPostImages/' + $postId;
+        let $url = '/drfixed/DiscoveReal/public/post/getPostImages/' + $postId;
 
         $.get($url, function (data) {
 
@@ -46,7 +48,9 @@ Dropzone.options.drDropzoneEdit = {
 
             $.ajax({
                 type: 'POST',
-                url: '/post/postImageDelete',
+                // change the url to your url
+                // url: '/post/postImageDelete',
+                url: '/drfixed/DiscoveReal/public/post/postImageDelete',
                 data: {
                     photoId: file.photoId,
                     _token: $('#csrf-token').val()

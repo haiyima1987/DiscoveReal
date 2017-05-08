@@ -34,17 +34,17 @@
                                 <a href="#"
                                    data-toggle="modal"
                                    data-target="#userInfo"
-                                   data-img="{{ ($user = $post->user)->photo ? url($user->photo) : url('img/avatar.png') }}"
-                                   data-identity="{{ $user->id }}"
-                                   data-username="{{ $user->username }}"
-                                   data-role="{{ $user->role->role }}"
-                                   data-bday="{{ $user->birthday }}"
-                                   data-location="{{ $user->city. ', '.$user->country }}"
-                                   data-year="{{ $user->created_at->format('d-M-Y') }}"
-                                   data-count="{{ count($user->posts) }}"
-                                   data-route="{{ route('user.allPosts', $user) }}"
-                                   data-msg="{{ route('messages.create', $user) }}">
-                                    {{ $post->user->username }}
+                                   data-img="{{ $post->user->photo ? url($post->user->photo) : url('img/avatar.png') }}"
+                                   data-identity="{{ $post->user->id }}"
+                                   data-username="{{ $post->user->name }}"
+                                   data-role="{{ $post->user->role->role }}"
+                                   data-bday="{{ $post->user->birthday }}"
+                                   data-location="{{ $post->user->city. ', '.$post->user->country }}"
+                                   data-year="{{ $post->user->created_at->format('d-M-Y') }}"
+                                   data-count="{{ count($post->user->posts) }}"
+                                   data-route="{{ route('user.allPosts', $post->user) }}"
+                                   data-msg="{{ route('messages.create', $post->user) }}">
+                                    {{ $post->user->name }}
                                 </a>
                                 at {{ $post->created_at->format('d-M-Y, H:i A') }}
                             </p>

@@ -35,6 +35,9 @@ class CommentController extends Controller
 
     public function editComment(Comment $comment)
     {
+        // fixed!! guard added here
+        $this->authorize('update', $comment);
+
         return view('post.editComment', compact('comment'));
     }
 

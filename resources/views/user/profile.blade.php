@@ -24,7 +24,7 @@
                          alt="{{ $user->id }}">
                 </div>
                 <hr>
-                <h5>{{ $user->username }}</h5>
+                <h5>{{ $user->name }}</h5>
                 <h5>{{ ucwords($user->role->role) }}</h5>
                 <p><i class="fa fa-id-card-o" aria-hidden="true"></i> {{ $user->firstName . ' ' . $user->lastName }}
                     <i class="fa {{ $user->gender == 'M' ? 'fa-male' : 'fa-female' }} fa-lg" aria-hidden="true"></i>

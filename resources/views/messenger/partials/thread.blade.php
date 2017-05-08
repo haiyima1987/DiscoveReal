@@ -7,5 +7,5 @@
     <td class="col-sm-2">
         <i class="fa fa-inbox" aria-hidden="true"></i> {{ $thread->userUnreadMessagesCount(Auth::id()) }}
     </td>
-    <td class="col-sm-3">{{ $thread->creator()->username }}</td>
+    <td class="col-sm-3">{{ $thread->creator()->name }}</td>
 </tr>

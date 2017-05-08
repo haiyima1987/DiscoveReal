@@ -12,11 +12,11 @@
 @section('content')
     <div class="content">
         <div class="col-sm-6 col-sm-offset-3">
-            <h4><strong>Message To:</strong> {{ ($author = $user)->username }}</h4>
+            <h4><strong>Message To:</strong> {{ $user->name }}</h4>
             <br>
             {!! Form::open(['method' => 'post', 'action' => 'MessagesController@store']) !!}
             {{ csrf_field() }}
-            {!! Form::hidden('recipientId', $author->id) !!}
+            {!! Form::hidden('recipientId', $user->id) !!}
             {{--{!! Form::hidden('recipient', $author) !!}--}}
 
             <div class="form-group">

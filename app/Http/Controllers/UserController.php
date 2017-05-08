@@ -9,6 +9,7 @@ use App\Http\Requests\SignupRequest;
 use App\Post;
 use App\User;
 use Cmgmyr\Messenger\Models\Thread;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 
@@ -23,7 +24,7 @@ class UserController extends Controller
     {
         $user = new User([
             'role_id' => 2,
-            'username' => $request->username,
+            'name' => $request->name,
             'password' => bcrypt($request->password),
             'photo' => null,
             'firstName' => $request->firstName,
@@ -39,7 +40,9 @@ class UserController extends Controller
         if ($user->save()) {
             Auth::login($user);
             Session::put('id', $user->id);
+            //fixed!! redirect instead of returning a view
             return redirect()->route('user.viewProfile');
+//            return view('user.profile', compact('user', 'posts'));
         } else {
             return view('page.signup');
         }
@@ -52,7 +55,7 @@ class UserController extends Controller
 
     public function logInUser(LoginRequest $request)
     {
-        $login = filter_var($request->login, FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
+        $login = filter_var($request->login, FILTER_VALIDATE_EMAIL) ? 'email' : 'name';
         $request->merge([$login => $request->input('login')]);
 
         if (Auth::attempt($request->only($login, 'password'))) {
@@ -113,13 +116,13 @@ class UserController extends Controller
         ]);
 
         if ($result) {
-            $notification = ['toasterMsg' => "Successfully Updated Profile: " . $user->username,
+            $notification = ['toasterMsg' => "Successfully Updated Profile: " . $user->name,
                 'alert-type' => 'success'];
             return redirect()->route('user.viewProfile')->with($notification);
         } else {
-            $notification = ['toasterMsg' => "Failed to Update Profile: " . $user->username,
+            $notification = ['toasterMsg' => "Failed to Update Profile: " . $user->name,
                 'alert-type' => 'error'];
-            return view('page.signup');
+            return view('page.signup', $notification);
         }
     }
 

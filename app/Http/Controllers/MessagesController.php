@@ -62,6 +62,7 @@ class MessagesController extends Controller
      */
     public function create(User $user)
     {
+        // fixed!! Related view changed
         if (Auth::id() != $user->id) {
             return view('messenger.create', compact('user'));
         } else {

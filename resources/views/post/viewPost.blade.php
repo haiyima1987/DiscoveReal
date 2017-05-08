@@ -30,7 +30,7 @@
                 <div class="postSide col-sm-3">
                     {{--{{ $author->id }}--}}
                     <img class="img-circle img-responsive"
-                         src="{{ ($author = $post->user)->photo ? url($author->photo) : url('img/avatar.png') }}"
+                         src="{{ $author->photo ? url($author->photo) : url('img/avatar.png') }}"
                          alt="{{ $author->id }}">
                     <hr>
                     <h4>
@@ -39,14 +39,15 @@
                            data-target="#userInfo"
                            data-img="{{ $author->photo ? url($author->photo) : url('img/avatar.png') }}"
                            data-identity="{{ $author->id }}"
-                           data-username="{{ $author->username }}"
+                           data-username="{{ $author->name }}"
                            data-role="{{ $author->role->role }}"
                            data-bday="{{ $author->birthday }}"
                            data-location="{{ $author->city. ', '.$author->country }}"
                            data-year="{{ $author->created_at->format('d-M-Y') }}"
                            data-count="{{ count($author->posts) }}"
-                           data-route="{{ route('user.allPosts', $author) }}">
-                            {{ $post->user->username }}
+                           data-route="{{ route('user.allPosts', $author) }}"
+                           data-msg="{{ route('messages.create', $post->user) }}">
+                            {{ $post->user->name }}
                         </a>
                     </h4>
                     <p id="authenticatedId" hidden>{{ Auth::id() }}</p>
@@ -87,7 +88,10 @@
                     <p>{!! $post->content !!}</p>
 
                     <div class="postBtmBar">
-                        <a href="{{ route('post.viewToPdf', $post) }}" class="pull-left">Download this post as PDF</a>
+                        @if(Auth::check())
+                            <a href="{{ route('post.viewToPdf', $post) }}" class="pull-left">Download this post as
+                                PDF</a>
+                        @endif
                         @can('update', $post)
                             <a href="{{ route('post.edit', $post) }}" class="btn btn-success pull-right btnEdit">
                                 <i class="fa fa-pencil" aria-hidden="true"></i> Edit

@@ -15,7 +15,7 @@ class UsersTableSeeder extends Seeder
     {
         $user = new User([
             'role_id' => 1,
-            'username' => 'haiyima',
+            'name' => 'haiyima',
             'password' => bcrypt(11111111),
             'photo' => '1491165813.png',
             'firstName' => 'Haiyi',
@@ -30,7 +30,7 @@ class UsersTableSeeder extends Seeder
         $user->save();
         $user = new User([
             'role_id' => 2,
-            'username' => 'robsmith',
+            'name' => 'robsmith',
             'password' => bcrypt(11111111),
             'photo' => '1491165765.jpg',
             'firstName' => 'Rob',
@@ -45,7 +45,7 @@ class UsersTableSeeder extends Seeder
         $user->save();
         $user = new User([
             'role_id' => 2,
-            'username' => 'laurastone',
+            'name' => 'laurastone',
             'password' => bcrypt(11111111),
             'photo' => null,
             'firstName' => 'Laura',
@@ -60,7 +60,7 @@ class UsersTableSeeder extends Seeder
         $user->save();
         $user = new User([
             'role_id' => 2,
-            'username' => 'mengxuezhang',
+            'name' => 'mengxuezhang',
             'password' => bcrypt(11111111),
             'photo' => null,
             'firstName' => 'Mengxue',
