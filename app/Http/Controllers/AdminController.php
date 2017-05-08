@@ -34,7 +34,8 @@ class AdminController extends Controller
     // functions about posts
     public function showAllPosts()
     {
-        $posts = Post::paginate(30);
+        // fixed!! With eager loading
+        $posts = Post::with('user')->paginate(30);
         return view('admin.posts')->with('posts', $posts);
     }
 

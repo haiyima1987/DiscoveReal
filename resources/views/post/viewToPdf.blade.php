@@ -6,8 +6,8 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    {{--<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>--}}
-    <!-- Latest compiled and minified CSS -->
+{{--<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>--}}
+<!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
           integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <!-- jQuery library -->
@@ -25,11 +25,18 @@
             position: relative;
             min-height: 340px;
         }
+
         .postSide {
             position: absolute;
             top: 0;
             bottom: 0;
             left: 0;
+        }
+
+        /* fixed!! image fit in frame */
+        .postImg {
+            width: 100%;
+            padding: 5px;
         }
     </style>
 </head>
@@ -46,10 +53,12 @@
     <div class="postBox row">
         <div class="postSide col-xs-3">
             {{--{{ $author->id }}--}}
-            <img src="{{ ($author = $post->user)->photo ? url($author->photo) : url('img/avatar.png') }}"
+            {{-- fixed!! added img-circle it still works but img-responsive doesn't --}}
+            <img class="img-circle img-responsive"
+                 src="{{ $author->photo ? url($author->photo) : url('img/avatar.png') }}"
                  alt="{{ $author->id }}">
             <hr>
-            <a href="#">{{ $post->user->username }}</a>
+            <a href="#">{{ $post->user->name }}</a>
             <p>{{ ucwords($author->role->role) }}</p>
             <p>{{ $author->city . ', '. $author->country }}</p>
             <p>Date Joined: {{ $author->created_at->diffForHumans() }}</p>
@@ -70,7 +79,8 @@
                 <div class="row">
                     @foreach($photoChunk as $photo)
                         <div class="col-xs-6">
-                            <img src="{{ url($photo->imgPath) }}" alt="{{ $photo->post_id }}">
+                            <img class="postImg"
+                                 src="{{ url($photo->imgPath) }}" alt="{{ $photo->post_id }}">
                         </div>
                     @endforeach
                 </div>
@@ -84,14 +94,16 @@
 
         <div class="postBox row">
             <div class="postSide col-xs-3">
-                <img src="{{ $author->photo ? url($author->photo) : url('img/avatar.png') }}"
-                     alt="{{ $author->id }}">
+                {{-- fixed!! added img-circle it still works but img-responsive doesn't --}}
+                <img class="img-circle img-responsive"
+                     src="{{ $comment->user->photo ? url($comment->user->photo) : url('img/avatar.png') }}"
+                     alt="{{ $comment->user->id }}">
                 <hr>
-                <a href="#">{{ $post->user->username }}</a>
-                <p>{{ ucwords($author->role->role) }}</p>
-                <p>{{ $author->city . ', '. $author->country }}</p>
-                <p>Date Joined: {{ $author->created_at->diffForHumans() }}</p>
-                <p>Posts: {{ count($author->posts) }}</p>
+                <a href="#">{{ $post->user->name }}</a>
+                <p>{{ ucwords($comment->user->role->role) }}</p>
+                <p>{{ $comment->user->city . ', '. $comment->user->country }}</p>
+                <p>Date Joined: {{ $comment->user->created_at->diffForHumans() }}</p>
+                <p>Posts: {{ count($comment->user->posts) }}</p>
             </div>
 
             <div class="spacer col-xs-3"></div>

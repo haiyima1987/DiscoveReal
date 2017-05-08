@@ -20,13 +20,13 @@
 
             <fieldset>
                 <legend>Login Information:</legend>
-                <div class="input-group input-group {{ $errors->has('username') ? 'has-error' : '' }}">
+                <div class="input-group input-group {{ $errors->has('name') ? 'has-error' : '' }}">
                     <span class="input-group-addon"><i class="fa fa-user-circle-o fa-fw" aria-hidden="true"></i></span>
-                    {!! Form::text('username', old('username'), ['class'=>'form-control', 'placeholder'=>'Enter Username']) !!}
+                    {!! Form::text('name', old('name'), ['class'=>'form-control', 'placeholder'=>'Enter name']) !!}
                 </div>
-                @if ($errors->has('username'))
+                @if ($errors->has('name'))
                     <p class="alert alert-danger text-center errorInfo">
-                        <strong>{{ $errors->first('username') }}</strong></p>
+                        <strong>{{ $errors->first('name') }}</strong></p>
                 @endif
 
                 <div class="input-group input-group {{ $errors->has('password') ? 'has-error' : '' }}">

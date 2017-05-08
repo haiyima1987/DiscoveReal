@@ -28,7 +28,7 @@
                                data-target="#userInfo"
                                data-img="{{ $user->photo ? url($user->photo) : url('img/avatar.png') }}"
                                data-identity="{{ $user->id }}"
-                               data-username="{{ $user->username }}"
+                               data-username="{{ $user->name }}"
                                data-role="{{ $user->role->role }}"
                                data-bday="{{ $user->birthday }}"
                                data-location="{{ $user->city. ', '.$user->country }}"
@@ -36,7 +36,7 @@
                                data-count="{{ count($user->posts) }}"
                                data-route="{{ route('user.allPosts', $user) }}"
                                data-msg="{{ route('messages.create', $user) }}">
-                                {{ $user->username }}
+                                {{ $user->name }}
                             </a>
                             <p id="authenticatedId" hidden>{{ Auth::id() }}</p>
                         </td>
@@ -44,7 +44,7 @@
                         <td><a href="#"
                                data-toggle="modal"
                                data-target="#adminUserDelete"
-                               data-username="{{ $user->username }}"
+                               data-username="{{ $user->name }}"
                                data-identity="{{ $user->id }}"
                                class="btn btn-danger pull-right">
                                 <i class="fa fa-trash-o" aria-hidden="true"></i> Delete

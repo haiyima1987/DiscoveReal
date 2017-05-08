@@ -40,7 +40,9 @@ class HomeController extends Controller
             $allPosts = [];
 
             foreach ($country->locations as $location) {
-                foreach ($location->posts as $post) {
+                // fixed!! With eager loading
+                $locPosts = $location->posts->load('user');
+                foreach ($locPosts as $post) {
                     $allPosts[] = $post;
                 }
             }

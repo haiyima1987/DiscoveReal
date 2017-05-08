@@ -47,7 +47,8 @@ let deleteController = (() => {
 
     function _showModal(e) {
         $username.html("Username: " + $(e.relatedTarget).data('username'));
-        $action = "http://dr.dev/admin/user/delete/" + $(e.relatedTarget).data('identity');
+        // change the url to your server url
+        $action = "http://localhost/drfixed/DiscoveReal/public/admin/user/delete/" + $(e.relatedTarget).data('identity');
         $deleteForm.attr('action', $action);
     }
 })();

@@ -1,0 +1,40 @@
+// side bar
+.sidebar {
+  @include border-radius(0);
+}
+
+.navList {
+  padding: 0;
+  li {
+    width: 100%;
+    font-size: 1.2em;
+    border-top: 1px solid $body-bg;
+    background: $secondDarkGrey;
+    i {
+      font-size: 1.2em;
+    }
+    &:hover {
+      background: $sideBarWhite;
+      color: $secondDarkGrey;
+    }
+  }
+}
+
+.sideIcon {
+  display: inline-block;
+  width: 15px;
+  text-align: center;
+}
+
+// changes of bootstrap navbar
+.navbar-default {
+  .navbar-nav > li > a {
+    color: $sideBarWhite;
+    &:hover {
+      color: $secondDarkGrey;
+    }
+    &:focus {
+      color: $secondDarkGrey;
+    }
+  }
+}

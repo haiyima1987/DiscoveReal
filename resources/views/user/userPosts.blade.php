@@ -4,7 +4,7 @@
     <div class="banner">
         <img src="{{ url('img/banner3.png') }}" alt="banner">
         <div class="bannerText">
-            <h2><strong>{{ $user->username }}</strong></h2>
+            <h2><strong>{{ $user->name }}</strong></h2>
         </div>
     </div>
 @endsection
@@ -28,7 +28,7 @@
                     <td class="col-sm-8 tdHead"><a href="{{ route('post.view', $post) }}">
                             {{ ucwords($post->title) }}
                         </a>
-                        <p>Published by {{ $post->user->username }} at {{ $post->created_at->format('d-M-Y, H:i A') }}
+                        <p>Published by {{ $post->user->name }} at {{ $post->created_at->format('d-M-Y, H:i A') }}
                         </p>
                     </td>
                     <td class="col-sm-2">

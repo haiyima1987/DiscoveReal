@@ -4,7 +4,7 @@
              src="{{ $user->photo ? url($user->photo) : url('img/avatar.png') }}"
              alt="{{ $user->id }}">
         <hr>
-        <h4><strong>{{ $user->username }}</strong></h4>
+        <h4><strong>{{ $user->name }}</strong></h4>
         <p>{{ ucwords($user->role->role) }}</p>
         <p>{{ $user->city . ', '. $user->country }}</p>
         <p>Date Joined: {{ $user->created_at->diffForHumans() }}</p>

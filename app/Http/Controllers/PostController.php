@@ -68,10 +68,12 @@ class PostController extends Controller
 
     public function viewPost(Post $post)
     {
-        $comments = $post->comments;
+        // fixed!! Added author and eager loading
+        $comments = $post->comments->load('user');
         $photos = $post->photos;
+        $author = $post->user;
 
-        return view('post.viewPost', compact('post', 'comments', 'photos'));
+        return view('post.viewPost', compact('post', 'comments', 'photos', 'author'));
     }
 
     public function editPost(Post $post)
@@ -155,9 +157,11 @@ class PostController extends Controller
 
     public function generatePdfFromView(Post $post)
     {
-        $comments = $post->comments;
+        // fixed!! Added author and eager loading
+        $comments = $post->comments->load('user');
         $photos = $post->photos;
-        $pdf = PDF::loadView('post.viewToPdf', compact('post', 'comments', 'photos'));
+        $author = $post->user;
+        $pdf = PDF::loadView('post.viewToPdf', compact('post', 'comments', 'photos', 'author'));
         return $pdf->download('download.pdf');
     }
 }
